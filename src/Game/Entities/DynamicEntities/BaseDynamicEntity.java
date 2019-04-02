@@ -49,16 +49,16 @@ public class BaseDynamicEntity extends EntityBase {
                 if(toRight) {
                     direction = "Left";
                     setX(enemy.getX() - getDimension().width);
-                    System.out.println("Puto1");
+//                    System.out.println("Puto1");
                     
                 }
                 else{
                     direction = "Right";
                     setX(enemy.getX() + enemy.getDimension().width);
-                    System.out.println("Pfff");
-                    if(enemy instanceof Turtle) {
-                    	((Turtle) enemy).setAnim(((Turtle) enemy).getReverse());
-                    }
+//                    System.out.println("Pfff");
+//                    if(enemy instanceof Turtle) {
+//                    	((Turtle) enemy).setAnim(((Turtle) enemy).getReverse());
+//                    }
                 }
             }
         }
