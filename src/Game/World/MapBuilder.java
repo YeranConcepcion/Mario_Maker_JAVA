@@ -7,6 +7,7 @@ import Game.Entities.DynamicEntities.BaseDynamicEntity;
 import Game.Entities.DynamicEntities.Goomba;
 import Game.Entities.DynamicEntities.Mario;
 import Game.Entities.DynamicEntities.Mushroom;
+import Game.Entities.DynamicEntities.Turtle;
 import Game.Entities.StaticEntities.BaseStaticEntity;
 import Game.Entities.StaticEntities.BlackHole;
 import Game.Entities.StaticEntities.BoundBlock;
@@ -27,7 +28,9 @@ public class MapBuilder {
 	public static int misteryBlock = new Color(255,216,0).getRGB();
 	public static int mushroom = new Color(178,0,255).getRGB();
 	public static int goomba = new Color(167,15,1).getRGB();
+	
 // by yeran 
+	public static int turtle = new Color(51,255,51).getRGB();// green
 	public static int rainbowBlock = new Color(204,0,204).getRGB();// pink
 	public static int blackHoleBlock = new Color(160,160,160).getRGB();// gray
 	
@@ -52,11 +55,7 @@ public class MapBuilder {
 					BaseStaticEntity SurfaceBlock = new SurfaceBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(SurfaceBlock);
 				}
-				else if(currentPixel == surfaceBlock){
-					BaseStaticEntity SurfaceBlock = new SurfaceBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
-					mapInCreation.addBlock(SurfaceBlock);
-				}
-				
+// by yeran				
 				else if(currentPixel == rainbowBlock){
 					BaseStaticEntity RainbowBlock = new RainbowBrick(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(RainbowBlock);
@@ -67,6 +66,7 @@ public class MapBuilder {
 					mapInCreation.addBlock(BlackHole);
 				}
 				
+			
 				
 				else if(currentPixel == breakBlock){
 					BaseStaticEntity BreakBlock = new BreakBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
@@ -81,6 +81,11 @@ public class MapBuilder {
 					BaseDynamicEntity Goomba = new Goomba(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addEnemy(Goomba);
 				}
+				else if(currentPixel == turtle){
+					BaseDynamicEntity Turtle = new Turtle(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					mapInCreation.addEnemy(Turtle);
+				}
+				
 			}
 
 		}

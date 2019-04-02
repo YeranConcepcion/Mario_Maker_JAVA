@@ -48,7 +48,7 @@ public class Images {
 
 
     public static BufferedImage[] goomba;
-
+    public static BufferedImage[] turtle;
 
     public static BufferedImage title;
     public static BufferedImage Pause;
@@ -67,6 +67,7 @@ public class Images {
     public static BufferedImage boundBlock;
     public static BufferedImage mushroom;
     public static BufferedImage goombaDies;
+    public static BufferedImage turtleDies;
 
     private SpriteSheet mainmenuSpriteSheet;
     private SpriteSheet backgroundSpriteSheet;
@@ -74,6 +75,8 @@ public class Images {
     private SpriteSheet playerSpriteSheet;
     private SpriteSheet blockSpriteSheet;
     private SpriteSheet goombaSpriteSheet;
+   // to create the new enemy
+    private SpriteSheet turtleSpriteSheet;
     private SpriteSheet SSpriteSheet;
     private SpriteSheet SAttackSpriteSheet;
 
@@ -104,6 +107,7 @@ public class Images {
         marioBigJumpLeft = new BufferedImage[5];
         marioBigJumpRight = new BufferedImage[5];
         goomba = new BufferedImage[2];
+        turtle = new BufferedImage[4];
 
 
 
@@ -117,6 +121,7 @@ public class Images {
             playerSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/marioSNESSheet.png")));
             blockSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/blocksSheet.png")));
             goombaSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/goombaSprite.png")));
+            turtleSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/turtles.png")));
             SSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/Sheets.png")));
             SAttackSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/enemySheet2.png")));
 
@@ -314,6 +319,19 @@ public class Images {
             goomba[0]=goombaSpriteSheet.crop(119,40,162,162);
             goomba[1]= goombaSpriteSheet.crop(329,40,162,162);
             goombaDies=goombaSpriteSheet.crop(539,100,162,81);
+            
+            // turtle // remember do the animation of it when it dies
+//            turtle[0]=turtleSpriteSheet.crop(x, y, width, height)
+            
+            turtle[0]=turtleSpriteSheet.crop(21, 4, 16, 24);//walking to the left
+            
+            turtle[1]=turtleSpriteSheet.crop(77, 4, 16, 24);//walking to the left
+            
+            turtle[2]=turtleSpriteSheet.crop(138, 4, 16, 24);//walking to the right
+            
+            turtle[3]=turtleSpriteSheet.crop(168, 4, 16, 24);//walking to the right
+            
+            turtleDies = turtleSpriteSheet.crop(287, 9, 14, 24); // when mario jump on it
 
 
         }catch (IOException e) {

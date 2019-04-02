@@ -231,6 +231,12 @@ public class MenuState extends State {
 			display.getCanvas().setCursor(c);                                            //gray
 			colorSelected = MapBuilder.blackHoleBlock;
 		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_T)){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0,1,0), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);                                      //green      
+			colorSelected = MapBuilder.turtle;
+		}
+
 
 		if(mouseManager.isLeftPressed() && !clicked){
 			int posX =mouseManager.getMouseX()/GridPixelsize;
@@ -267,7 +273,9 @@ public class MenuState extends State {
 					"6 -> Mushroom (Purple)\n" +
 					"7 -> Goomba (Brown)\n"+
 					"8 -> RainBow Block (Pink)\n"+
-					"9 -> Black Hole Block (Gray)");
+					"9 -> Black Hole Block (Gray)\n"+
+					"T -> Turtle (Green)"
+					);
 		}
 	}
 	public UIAnimationButton getBut() {

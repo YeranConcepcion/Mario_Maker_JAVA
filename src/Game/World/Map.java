@@ -1,17 +1,21 @@
 package Game.World;
 
-import Display.UI.UIPointer;
-import Game.Entities.DynamicEntities.*;
-import Game.Entities.StaticEntities.BaseStaticEntity;
-import Game.Entities.StaticEntities.Wall;
-import Main.Handler;
-import Resources.Images;
-
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
 import Display.UI.UIListener;
+import Display.UI.UIPointer;
+import Game.Entities.DynamicEntities.BaseDynamicEntity;
+import Game.Entities.DynamicEntities.Goomba;
+import Game.Entities.DynamicEntities.Item;
+import Game.Entities.DynamicEntities.Mario;
+import Game.Entities.DynamicEntities.Turtle;
+import Game.Entities.StaticEntities.BaseStaticEntity;
+import Game.Entities.StaticEntities.Wall;
+import Main.Handler;
+import Resources.Images;
 
 public class Map {
 
@@ -66,6 +70,9 @@ public class Map {
                 }
             }else if(entity instanceof Goomba && !entity.ded){
                 g2.drawImage(((Goomba)entity).anim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+            }
+            else if(entity instanceof Turtle && !entity.ded){
+                g2.drawImage(((Turtle)entity).anim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
             }
             else if(entity instanceof UIPointer ){
                 ((UIPointer) entity).render(g2);

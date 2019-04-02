@@ -7,13 +7,13 @@ import Resources.Images;
 
 import java.awt.*;
 
-public class Goomba extends BaseDynamicEntity {
+public class Turtle extends BaseDynamicEntity {
 
     public Animation anim;
 
-    public Goomba(int x, int y, int width, int height, Handler handler) {
-        super(x, y, width, height, handler, Images.goomba[0]);
-        anim = new Animation(160,Images.goomba);
+    public Turtle(int x, int y, int width, int height, Handler handler) {
+        super(x, y, width, height, handler, Images.turtle[0]);
+        anim = new Animation(160,Images.turtle);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class Goomba extends BaseDynamicEntity {
 
     @Override
     public void kill() {
-        sprite = Images.goombaDies;
+        sprite = Images.turtleDies;
         ded=true;
     }
 }
