@@ -49,7 +49,7 @@ public class Images {
 
     public static BufferedImage[] goomba;
     public static BufferedImage[] turtle;
-
+    public static BufferedImage[] turtleReverse;
     public static BufferedImage title;
     public static BufferedImage Pause;
     public static BufferedImage Cursor;
@@ -68,6 +68,7 @@ public class Images {
     public static BufferedImage mushroom;
     public static BufferedImage goombaDies;
     public static BufferedImage turtleDies;
+   
 
     private SpriteSheet mainmenuSpriteSheet;
     private SpriteSheet backgroundSpriteSheet;
@@ -108,6 +109,7 @@ public class Images {
         marioBigJumpRight = new BufferedImage[5];
         goomba = new BufferedImage[2];
         turtle = new BufferedImage[4];
+        turtleReverse = new BufferedImage[4];
 
 
 
@@ -323,15 +325,22 @@ public class Images {
             // turtle // remember do the animation of it when it dies
 //            turtle[0]=turtleSpriteSheet.crop(x, y, width, height)
             
-            turtle[0]=turtleSpriteSheet.crop(21, 4, 16, 24);//walking to the left
+            turtle[0]=turtleSpriteSheet.crop(107, 4, 16, 24);//walking to the left
             
-            turtle[1]=turtleSpriteSheet.crop(77, 4, 16, 24);//walking to the left
+            turtle[1]=turtleSpriteSheet.crop(17, 4, 16, 24);//walking to the left
             
-            turtle[2]=turtleSpriteSheet.crop(138, 4, 16, 24);//walking to the right
+            turtle[2]=turtleSpriteSheet.crop(47, 4, 16, 24);//walking to the right
             
-            turtle[3]=turtleSpriteSheet.crop(168, 4, 16, 24);//walking to the right
+            turtle[3]=turtleSpriteSheet.crop(17, 4, 16, 24);//walking to the right
             
             turtleDies = turtleSpriteSheet.crop(287, 9, 14, 24); // when mario jump on it
+            
+            // reverse animation
+            
+            turtleReverse[0]=turtleSpriteSheet.crop(137, 4, 16, 24);//walking to the left
+            turtleReverse[1]=turtleSpriteSheet.crop(227, 4, 16, 24);//walking to the left
+            turtleReverse[2]=turtleSpriteSheet.crop(197, 4, 16, 24);//walking to the left
+            turtleReverse[3]=turtleSpriteSheet.crop(227, 4, 16, 24);//walking to the left
 
 
         }catch (IOException e) {
