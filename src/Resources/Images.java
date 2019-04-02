@@ -56,6 +56,10 @@ public class Images {
 
     public static BufferedImage testMap;
     public static BufferedImage testMaptwo;
+ 
+ // by yeran to add the new blocks
+    public static BufferedImage rainbowBlock;
+    public static BufferedImage blackHoleBlock;
 
     public static BufferedImage breakBlock;
     public static BufferedImage misteryBlock;
@@ -297,8 +301,11 @@ public class Images {
             boundBlock = interactableSpriteSheet.crop(12,73,16,16);
             misteryBlock = interactableSpriteSheet.crop(32,93,16,16);
             surfaceBlock = interactableSpriteSheet.crop(112,93,16,16);
+            
             //breakBlock = blockSpriteSheet.crop(272,112,16,16);
             breakBlock = ImageIO.read(getClass().getResourceAsStream("/Sheets/brick.png"));
+            rainbowBlock = ImageIO.read(getClass().getResourceAsStream("/Sheets/rainbow.png"));
+            blackHoleBlock = ImageIO.read(getClass().getResourceAsStream("/Sheets/blackhole.png"));
 
             //items
             mushroom = interactableSpriteSheet.crop(112,34,16,16);

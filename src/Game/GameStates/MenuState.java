@@ -220,6 +220,17 @@ public class MenuState extends State {
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.goomba;
 		}
+// by yeran
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_8)){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,12,0,12), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);                                                //pink
+			colorSelected = MapBuilder.rainbowBlock;
+		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_9)){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,128,0,128), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);                                            //gray
+			colorSelected = MapBuilder.blackHoleBlock;
+		}
 
 		if(mouseManager.isLeftPressed() && !clicked){
 			int posX =mouseManager.getMouseX()/GridPixelsize;
@@ -254,7 +265,9 @@ public class MenuState extends State {
 					"4 -> Surface Block (Orange)\n" +
 					"5 -> Bounds Block (Black)\n" +
 					"6 -> Mushroom (Purple)\n" +
-					"7 -> Goomba (Brown)");
+					"7 -> Goomba (Brown)\n"+
+					"8 -> RainBow Block (Pink)\n"+
+					"9 -> Black Hole Block (Gray)");
 		}
 	}
 	public UIAnimationButton getBut() {

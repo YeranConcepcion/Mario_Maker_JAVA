@@ -1,6 +1,7 @@
 package Game.Entities.DynamicEntities;
 
 import Main.Handler;
+
 import Resources.Animation;
 import Resources.Images;
 

@@ -1,6 +1,7 @@
 package Game.Entities.DynamicEntities;
 
 import Game.Entities.EntityBase;
+
 import Game.Entities.StaticEntities.BaseStaticEntity;
 import Main.Handler;
 

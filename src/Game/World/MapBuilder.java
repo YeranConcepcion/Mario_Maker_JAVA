@@ -1,15 +1,21 @@
 package Game.World;
 
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+
 import Game.Entities.DynamicEntities.BaseDynamicEntity;
 import Game.Entities.DynamicEntities.Goomba;
 import Game.Entities.DynamicEntities.Mario;
 import Game.Entities.DynamicEntities.Mushroom;
-import Game.Entities.StaticEntities.*;
+import Game.Entities.StaticEntities.BaseStaticEntity;
+import Game.Entities.StaticEntities.BlackHole;
+import Game.Entities.StaticEntities.BoundBlock;
+import Game.Entities.StaticEntities.BreakBlock;
+import Game.Entities.StaticEntities.MisteryBlock;
+import Game.Entities.StaticEntities.RainbowBrick;
+import Game.Entities.StaticEntities.SurfaceBlock;
 import Main.Handler;
 import Resources.Images;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class MapBuilder {
 
@@ -21,6 +27,10 @@ public class MapBuilder {
 	public static int misteryBlock = new Color(255,216,0).getRGB();
 	public static int mushroom = new Color(178,0,255).getRGB();
 	public static int goomba = new Color(167,15,1).getRGB();
+// by yeran 
+	public static int rainbowBlock = new Color(204,0,204).getRGB();// pink
+	public static int blackHoleBlock = new Color(160,160,160).getRGB();// gray
+	
 	public static boolean mapDone = false;
 
 	public static Map createMap(BufferedImage mapImage, Handler handler){
@@ -30,6 +40,8 @@ public class MapBuilder {
 				int currentPixel = mapImage.getRGB(i, j);
 				int xPos = i*pixelMultiplier;
 				int yPos = j*pixelMultiplier;
+				
+				
 				if(currentPixel == boundBlock){
 					BaseStaticEntity BoundBlock = new BoundBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(BoundBlock);
@@ -39,7 +51,24 @@ public class MapBuilder {
 				}else if(currentPixel == surfaceBlock){
 					BaseStaticEntity SurfaceBlock = new SurfaceBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(SurfaceBlock);
-				}else if(currentPixel == breakBlock){
+				}
+				else if(currentPixel == surfaceBlock){
+					BaseStaticEntity SurfaceBlock = new SurfaceBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					mapInCreation.addBlock(SurfaceBlock);
+				}
+				
+				else if(currentPixel == rainbowBlock){
+					BaseStaticEntity RainbowBlock = new RainbowBrick(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					mapInCreation.addBlock(RainbowBlock);
+				}
+				
+				else if(currentPixel == blackHoleBlock){
+					BaseStaticEntity BlackHole = new BlackHole(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					mapInCreation.addBlock(BlackHole);
+				}
+				
+				
+				else if(currentPixel == breakBlock){
 					BaseStaticEntity BreakBlock = new BreakBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(BreakBlock);
 				}else if(currentPixel == misteryBlock){
