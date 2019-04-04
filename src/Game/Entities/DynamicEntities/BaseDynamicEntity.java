@@ -11,7 +11,14 @@ import java.awt.image.BufferedImage;
 public class BaseDynamicEntity extends EntityBase {
 
     protected String direction = "Right";
-    public boolean falling = true,ded = false;
+    public String getDirection() {
+		return direction;
+	}
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+
+	public boolean falling = true,ded = false;
     protected int dedCounter=0;
     public double gravityAcc = 0.38;
     protected double velX=1,velY = 7;
@@ -49,16 +56,13 @@ public class BaseDynamicEntity extends EntityBase {
                 if(toRight) {
                     direction = "Left";
                     setX(enemy.getX() - getDimension().width);
-//                    System.out.println("Puto1");
+
                     
                 }
                 else{
                     direction = "Right";
                     setX(enemy.getX() + enemy.getDimension().width);
-//                    System.out.println("Pfff");
-//                    if(enemy instanceof Turtle) {
-//                    	((Turtle) enemy).setAnim(((Turtle) enemy).getReverse());
-//                    }
+
                 }
             }
         }

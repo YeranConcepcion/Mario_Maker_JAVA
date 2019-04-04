@@ -71,8 +71,14 @@ public class Map {
             }else if(entity instanceof Goomba && !entity.ded){
                 g2.drawImage(((Goomba)entity).anim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
             }
+// by yeran to choose the correct animation         
             else if(entity instanceof Turtle && !entity.ded){
-                g2.drawImage(((Turtle)entity).anim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+            	if(entity.getDirection().equals("Right")) {
+            
+                g2.drawImage(((Turtle)entity).reverse.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);}
+            	else {
+            		 g2.drawImage(((Turtle)entity).anim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+            	}
             }
             else if(entity instanceof UIPointer ){
                 ((UIPointer) entity).render(g2);
