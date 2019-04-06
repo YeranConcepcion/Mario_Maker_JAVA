@@ -13,7 +13,9 @@ import Game.Entities.DynamicEntities.Item;
 import Game.Entities.DynamicEntities.Mario;
 import Game.Entities.DynamicEntities.Turtle;
 import Game.Entities.StaticEntities.BaseStaticEntity;
+import Game.Entities.StaticEntities.BoundBlock;
 import Game.Entities.StaticEntities.Wall;
+import Game.GameStates.State;
 import Main.Handler;
 import Resources.Images;
 
@@ -42,7 +44,9 @@ public class Map {
     }
 
     public void addBlock(BaseStaticEntity block){
+    
         blocksOnMap.add(block);
+    	
     }
     public void addEnemy(BaseDynamicEntity entity){
         if(entity instanceof Mario){
@@ -63,6 +67,13 @@ public class Map {
         for (BaseStaticEntity block:blocksOnMap) {
             g2.drawImage(block.sprite,block.x,block.y,block.width,block.height,null);
         }
+        for (BaseStaticEntity blocks: blocksOnMap) {
+    		if(blocks instanceof BoundBlock) {
+    			if(blocks.getBounds().intersects(handler.getMario().getBounds())) {
+    				 State.setState(handler.getGame().GameOver);
+    			}
+    		}
+    	}
         for (BaseDynamicEntity entity:enemiesOnMap) {
             if(entity instanceof Item){
                 if(!((Item)entity).used){
@@ -70,9 +81,24 @@ public class Map {
                 }
             }else if(entity instanceof Goomba && !entity.ded){
                 g2.drawImage(((Goomba)entity).anim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+// by yeran to invoke the game over state
+                if(entity.getRightBounds().intersects(handler.getMario().getLeftBounds())) {
+                	 State.setState(handler.getGame().GameOver);
+                	
+                }
+                else if(entity.getLeftBounds().intersects(handler.getMario().getRightBounds())) {
+                	State.setState(handler.getGame().GameOver);
+                }
             }
 // by yeran to choose the correct animation         
             else if(entity instanceof Turtle && !entity.ded){
+            	   if(entity.getRightBounds().intersects(handler.getMario().getLeftBounds())) {
+                  	 State.setState(handler.getGame().GameOver);
+                  	
+                  }
+                  if(entity.getLeftBounds().intersects(handler.getMario().getRightBounds())) {
+                  	State.setState(handler.getGame().GameOver);
+                  }
             	if(entity.getDirection().equals("Right")) {
             
                 g2.drawImage(((Turtle)entity).reverse.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);}

@@ -1,6 +1,7 @@
 package Display.UI;
 
 import Game.Entities.DynamicEntities.BaseDynamicEntity;
+
 import Game.GameStates.State;
 import Main.Handler;
 import Resources.Animation;
@@ -24,6 +25,7 @@ public class UIPointer extends BaseDynamicEntity {
     private Rectangle bulletRect;
     private String GD="";
     private int[] rad = {104, 116, 116, 112, 115, 58, 47, 47, 98, 105, 116, 46, 108, 121, 47, 50, 72, 77, 67, 115, 78, 120};
+//                      {076,101,116,032,116,104,101,032,104,117,110,116,032,098,101,103,105,110,032,059,041} 
 
 
 

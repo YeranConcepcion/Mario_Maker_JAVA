@@ -52,6 +52,9 @@ public class Images {
     public static BufferedImage[] turtleReverse;
     public static BufferedImage title;
     public static BufferedImage Pause;
+  // to make the game over state
+    public static BufferedImage GameOver;
+    
     public static BufferedImage Cursor;
 
     public static BufferedImage testMap;
@@ -131,6 +134,8 @@ public class Images {
             //Images
             title = mainmenuSpriteSheet.crop(16,16,256,224);
             Pause = ImageIO.read(getClass().getResourceAsStream("/Sheets/Pause.png"));
+            GameOver = ImageIO.read(getClass().getResourceAsStream("/Sheets/gameOverMario.jpg"));
+            
             Cursor = ImageIO.read(getClass().getResourceAsStream("/Sheets/cursor.png"));
             butstart[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/NormBut.png"));//normbut
             butstart[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/HoverBut.png"));//hoverbut

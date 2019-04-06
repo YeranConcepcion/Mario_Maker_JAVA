@@ -3,6 +3,7 @@ package Game.Entities.DynamicEntities;
 import Game.Entities.EntityBase;
 
 import Game.Entities.StaticEntities.BaseStaticEntity;
+import Game.Entities.StaticEntities.BoundBlock;
 import Main.Handler;
 
 import java.awt.*;
@@ -36,6 +37,7 @@ public class BaseDynamicEntity extends EntityBase {
 
         for (BaseStaticEntity brick : handler.getMap().getBlocksOnMap()) {
             Rectangle brickBounds = !toRight ? brick.getRightBounds() : brick.getLeftBounds();
+        
             if (mushroomBounds.intersects(brickBounds)) {
                 if(toRight) {
                     direction = "Left";
@@ -65,6 +67,7 @@ public class BaseDynamicEntity extends EntityBase {
 
                 }
             }
+            
         }
 
     }
