@@ -13,6 +13,7 @@ import Game.Entities.DynamicEntities.Item;
 import Game.Entities.DynamicEntities.Mario;
 import Game.Entities.DynamicEntities.Turtle;
 import Game.Entities.StaticEntities.BaseStaticEntity;
+import Game.Entities.StaticEntities.BlackHole;
 import Game.Entities.StaticEntities.BoundBlock;
 import Game.Entities.StaticEntities.Wall;
 import Game.GameStates.State;
@@ -67,8 +68,9 @@ public class Map {
         for (BaseStaticEntity block:blocksOnMap) {
             g2.drawImage(block.sprite,block.x,block.y,block.width,block.height,null);
         }
+// by yeran to implement the game over state        
         for (BaseStaticEntity blocks: blocksOnMap) {
-    		if(blocks instanceof BoundBlock) {
+    		if(blocks instanceof BoundBlock || blocks instanceof  BlackHole ) {
     			if(blocks.getBounds().intersects(handler.getMario().getBounds())) {
     				 State.setState(handler.getGame().GameOver);
     			}
