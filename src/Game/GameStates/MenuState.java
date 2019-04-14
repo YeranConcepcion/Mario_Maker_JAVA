@@ -72,7 +72,7 @@ public class MenuState extends State {
 				State.setState(handler.getGame().gameState);}}, this.handler);
 		uiManager.addObjects(new UIImageButton(handler.getWidth()/2-64, handler.getHeight()/2+(handler.getHeight()/8), 128, 64, Images.butstart, () -> {
 			if(!handler.isInMap()) {
-				mode = "Select";
+				mode = "GameType";
 			}
 		}));
 	}
@@ -82,6 +82,26 @@ public class MenuState extends State {
 		if(!creatingMap) {
 			handler.getMouseManager().setUimanager(uiManager);
 			uiManager.tick();
+			
+			if(mode.equals("GameType")) {
+				mode = "Selecting";
+				uiManager = new UIManager(handler);
+				handler.getMouseManager().setUimanager(uiManager);
+				
+				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) - (64), 128, 64, "Multiplayer", () -> {
+					if(!handler.isInMap()) {
+						mode = "Select";
+						
+					}
+				}, handler,Color.BLACK));
+				
+				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, handler.getHeight() / 2 + (handler.getHeight() / 10), 128, 64, "Single Player", () -> {
+					if(!handler.isInMap()) {
+						mode = "Select";
+						
+					}
+				}, handler,Color.BLACK));
+			}
 			if (mode.equals("Select")) {
 				mode = "Selecting";
 				uiManager = new UIManager(handler);
@@ -141,7 +161,7 @@ public class MenuState extends State {
 				uiManager = new UIManager(handler);
 				handler.getMouseManager().setUimanager(uiManager);
 				uiManager.addObjects(new UIImageButton(handler.getWidth() / 2 - 64, handler.getHeight() / 2 + (handler.getHeight() / 8), 128, 64, Images.butstart, () -> {
-					mode = "Select";
+					mode = "GameType";
 				}));
 			}
 		}else{
