@@ -1,27 +1,35 @@
 package Game.GameStates;
 
 
-import Display.DisplayScreen;
-import Display.UI.UIStringButton;
-import Game.World.MapBuilder;
-import Input.KeyManager;
-import Input.MouseManager;
-import Main.Handler;
-import Resources.Images;
-import Display.UI.UIAnimationButton;
-import Display.UI.UIImageButton;
-import Display.UI.UIManager;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+
+import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import Display.DisplayScreen;
+import Display.MultiPScreen;
+import Display.UI.UIAnimationButton;
+import Display.UI.UIImageButton;
+import Display.UI.UIManager;
+import Display.UI.UIStringButton;
+import Game.World.MapBuilder;
+import Input.KeyManager;
+import Input.MouseManager;
+import Main.Handler;
+import Resources.Images;
 
 /**
  * Created by AlexVR on 7/1/2018.
@@ -33,6 +41,8 @@ public class MenuState extends State {
 	private String mode= "Menu";
 
 	private DisplayScreen display;
+	private MultiPScreen displayTwo;
+
 	private int[] str={83,117,98,32,116,111,32,80,101,119,100,115};
 	private String str2="";
 
@@ -85,11 +95,14 @@ public class MenuState extends State {
 			
 			if(mode.equals("GameType")) {
 				mode = "Selecting";
+				
 				uiManager = new UIManager(handler);
 				handler.getMouseManager().setUimanager(uiManager);
 				
 				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) - (64), 128, 64, "Multiplayer", () -> {
 					if(!handler.isInMap()) {
+						handler.setMultiOn(true);
+			
 						mode = "Select";
 						
 					}
@@ -97,6 +110,7 @@ public class MenuState extends State {
 				
 				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, handler.getHeight() / 2 + (handler.getHeight() / 10), 128, 64, "Single Player", () -> {
 					if(!handler.isInMap()) {
+						handler.setMultiOn(false);
 						mode = "Select";
 						
 					}
@@ -172,6 +186,8 @@ public class MenuState extends State {
 			}
 		}
 	}
+
+
 
 	@Override
 	public void render(Graphics g) {

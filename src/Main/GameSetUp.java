@@ -1,10 +1,12 @@
 package Main;
 
 import java.awt.Graphics;
+
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
 import Display.DisplayScreen;
+import Display.MultiPScreen;
 import Display.UI.UIPointer;
 import Game.Entities.DynamicEntities.Mario;
 import Game.Entities.DynamicEntities.Player;
@@ -29,6 +31,7 @@ import Resources.MusicHandler;
 
 public class GameSetUp implements Runnable {
     public DisplayScreen display;
+    public MultiPScreen displayTwo;
     public String title;
 
     private boolean running = false;
@@ -36,6 +39,8 @@ public class GameSetUp implements Runnable {
     public static boolean threadB;
 
     private BufferStrategy bs;
+// for the second screen
+    private BufferStrategy bs2;
     private Graphics g;
     public UIPointer pointer;
 
@@ -75,7 +80,10 @@ public class GameSetUp implements Runnable {
         display.getFrame().addMouseMotionListener(mouseManager);
         display.getCanvas().addMouseListener(mouseManager);
         display.getCanvas().addMouseMotionListener(mouseManager);
-
+        
+// to make the second screen       
+  
+      
         Images img = new Images();
 
         musicHandler.restartBackground();
@@ -86,6 +94,7 @@ public class GameSetUp implements Runnable {
         GameOver = new GameOverState(handler);
 
         State.setState(menuState);
+        
     }
 
     public void reStart(){
@@ -140,6 +149,7 @@ public class GameSetUp implements Runnable {
 
     private void tick(){
         //checks for key types and manages them
+    	
         keyManager.tick();
 
         if(musicHandler.ended()){
@@ -152,6 +162,17 @@ public class GameSetUp implements Runnable {
         if (handler.isInMap()) {
             updateCamera();
         }
+        if(	handler.multiOn) {
+        displayTwo = new MultiPScreen(title, handler.width, handler.height);
+        displayTwo.getFrame().addKeyListener(keyManager);
+        displayTwo.getFrame().addMouseListener(mouseManager);
+        displayTwo.getFrame().addMouseMotionListener(mouseManager);
+        displayTwo.getCanvas().addMouseListener(mouseManager);
+        displayTwo.getCanvas().addMouseMotionListener(mouseManager);
+        handler.setMultiOn(false);
+
+        }
+
 
     }
 
@@ -179,12 +200,20 @@ public class GameSetUp implements Runnable {
 
     private void render(){
         bs = display.getCanvas().getBufferStrategy();
+        
+        bs2 = display.getCanvas().getBufferStrategy();
 
         if(bs == null){
             display.getCanvas().createBufferStrategy(3);
             return;
         }
+        
+        if(bs2 == null){
+            display.getCanvas().createBufferStrategy(3);
+            return;
+        }
         g = bs.getDrawGraphics();
+        g = bs2.getDrawGraphics();
         //Clear Screen
         g.clearRect(0, 0,  handler.width, handler.height);
 
@@ -196,6 +225,7 @@ public class GameSetUp implements Runnable {
 
         //End Drawing!
         bs.show();
+        bs2.show();
         g.dispose();
     }
     public Map getMap() {

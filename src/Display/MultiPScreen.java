@@ -34,7 +34,7 @@ public class MultiPScreen {
 
     private void createDisplay(){
         frame = new JFrame(title);
-        frame.setSize(width, height);
+        frame.setSize(width-1000, height);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
@@ -58,7 +58,19 @@ public class MultiPScreen {
         frame.pack();
     }
 
-    public Canvas getCanvas(){
+    public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
+	}
+
+	public Canvas getCanvas(){
         return canvas;
     }
 

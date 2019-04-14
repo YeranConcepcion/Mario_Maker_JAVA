@@ -20,8 +20,17 @@ public class Handler {
     private static final GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
     public static final int DEFAULTWIDTH = gd.getDisplayMode().getWidth();
     public static final int DEFAULTHEIGHT = gd.getDisplayMode().getHeight();
+    public boolean multiOn = false;
 
-    int width,height;
+    public boolean isMultiOn() {
+		return multiOn;
+	}
+
+	public void setMultiOn(boolean multiOn) {
+		this.multiOn = multiOn;
+	}
+
+	int width,height;
 
     private GameSetUp game;
     private Mario mario;
