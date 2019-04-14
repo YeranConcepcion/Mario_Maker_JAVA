@@ -1,8 +1,10 @@
 package Main;
 
 import Game.Entities.DynamicEntities.Mario;
+
 import Game.World.Map;
 import Input.Camera;
+import Input.SecondCamera;
 import Input.KeyManager;
 import Input.MouseManager;
 
@@ -27,6 +29,7 @@ public class Handler {
     private boolean marioInMap =false;
 
     private Camera camera;
+    private SecondCamera camera2;
 
 
     public Handler(){
@@ -92,5 +95,13 @@ public class Handler {
 
     public void setCamera(Camera camera) {
         this.camera = camera;
+    }
+    
+    public SecondCamera getCamera2() {
+        return camera2;
+    }
+
+    public void setCamera2(SecondCamera camera) {
+        this.camera2 = camera;
     }
 }
