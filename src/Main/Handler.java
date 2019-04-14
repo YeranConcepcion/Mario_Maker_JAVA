@@ -1,6 +1,7 @@
 package Main;
 
 import Game.Entities.DynamicEntities.Mario;
+
 import Game.World.Map;
 import Input.Camera;
 import Input.KeyManager;
