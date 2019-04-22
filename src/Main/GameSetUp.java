@@ -230,7 +230,7 @@ public class GameSetUp implements Runnable {
         bs2.show();
         g.dispose();
  // by yeran to draw on the second screen//
-        if(multiAc && State.getState().equals(gameState)  || State.getState().equals(GameOver)) {
+        if(multiAc) {
         	bs = displayTwo.getCanvas().getBufferStrategy();
 
         
