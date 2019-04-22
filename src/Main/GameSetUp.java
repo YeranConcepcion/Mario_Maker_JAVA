@@ -33,7 +33,9 @@ public class GameSetUp implements Runnable {
     public DisplayScreen display;
     public MultiPScreen displayTwo;
     public String title;
-
+    
+    
+    private boolean multiAc = false;
     private boolean running = false;
     private Thread thread;
     public static boolean threadB;
@@ -81,8 +83,7 @@ public class GameSetUp implements Runnable {
         display.getCanvas().addMouseListener(mouseManager);
         display.getCanvas().addMouseMotionListener(mouseManager);
         
-// to make the second screen       
-  
+
       
         Images img = new Images();
 
@@ -170,6 +171,7 @@ public class GameSetUp implements Runnable {
         displayTwo.getCanvas().addMouseListener(mouseManager);
         displayTwo.getCanvas().addMouseMotionListener(mouseManager);
         handler.setMultiOn(false);
+        multiAc = true;
 
         }
 
@@ -227,6 +229,32 @@ public class GameSetUp implements Runnable {
         bs.show();
         bs2.show();
         g.dispose();
+ // by yeran to draw on the second screen//
+        if(multiAc && State.getState().equals(gameState)  || State.getState().equals(GameOver)) {
+        	bs = displayTwo.getCanvas().getBufferStrategy();
+
+        
+        	if(bs == null){
+        		displayTwo.getCanvas().createBufferStrategy(3);
+        		return;
+        	}
+
+        	
+        	g = bs.getDrawGraphics();
+        	
+        	//Clear Screen
+        	g.clearRect(0, 0,  handler.width, handler.height);
+
+        	//Draw Here!
+        	g2 = (Graphics2D) g.create();
+
+        	if(State.getState() != null)
+        		State.getState().render(g);
+
+        	//End Drawing!
+        	bs.show();
+        	
+        	g.dispose();}
     }
     public Map getMap() {
     	Map map = new Map(this.handler);
