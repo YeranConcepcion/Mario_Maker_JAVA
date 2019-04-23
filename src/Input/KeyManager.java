@@ -12,6 +12,7 @@ public class KeyManager implements KeyListener {
 
 	private boolean[] keys,justPressed,cantPress;
 	public boolean up=false, down=false, left=false, right=false,pbutt=false,runbutt=false;
+	public boolean upl=false, downl=false, leftl=false, rightl=false,pbuttl=false,runbuttl=false;
 
 
 	public KeyManager(){
@@ -36,13 +37,21 @@ public class KeyManager implements KeyListener {
 			}
 		}
 
-		up = keys[KeyEvent.VK_W] || keys[KeyEvent.VK_UP];
-		down = keys[KeyEvent.VK_S] || keys[KeyEvent.VK_DOWN];
-		left = keys[KeyEvent.VK_A] || keys[KeyEvent.VK_LEFT];
-		right = keys[KeyEvent.VK_D] || keys[KeyEvent.VK_RIGHT];
+		up = keys[KeyEvent.VK_W];
+		down = keys[KeyEvent.VK_S] ;
+		left = keys[KeyEvent.VK_A] ;
+		right = keys[KeyEvent.VK_D];
 
 		pbutt = keys[KeyEvent.VK_ESCAPE];
 		runbutt = keys[KeyEvent.VK_SHIFT];
+		
+		upl =  keys[KeyEvent.VK_UP];
+		downl =  keys[KeyEvent.VK_DOWN];
+		leftl =  keys[KeyEvent.VK_LEFT];
+		rightl =keys[KeyEvent.VK_RIGHT];
+
+		
+//		runbutt = keys[KeyEvent.];
 
 	}
 

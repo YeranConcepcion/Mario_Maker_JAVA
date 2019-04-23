@@ -74,9 +74,10 @@ public class GameSetUp implements Runnable {
         initialmouseManager = mouseManager;
         musicHandler = new MusicHandler(handler);
         handler.setCamera(new Camera());
-        if(handler.multiForLuigi) {
+        
+        //if(handler.multiForLuigi) {
         	handler.setCamera2(new SecondCamera());
-        }
+        //}
     }
 
     private void init(){
@@ -181,9 +182,9 @@ public class GameSetUp implements Runnable {
         multiAc = true;
 
         }
-//        if (handler.isInMap()&& handler.multiForLuigi) {
-//            updateCamera2();
-//        }
+        if (handler.isInMap()&& handler.multiForLuigi) {
+            updateCamera2();
+        }
 
 
     }

@@ -73,12 +73,15 @@ public class Map {
         handler.setIsInMap(true);
         Point camLocation = new Point((int)handler.getCamera().getX(), (int)handler.getCamera().getY());
         g2.translate(-camLocation.x, -camLocation.y);
-//     // for the luigi camera   
-//        if(handler.multiForLuigi) {
-//        Point camLocation2 = new Point((int)handler.getCamera2().getX(), (int)handler.getCamera2().getY());
-//        g2.translate(-camLocation2.x, -camLocation2.y);}
-//        
-//        
+     // for the luigi camera   
+        
+        Point camLocation2 = null;
+        if(handler.multiForLuigi) {
+	        camLocation2 = new Point((int)handler.getCamera2().getX(), (int)handler.getCamera2().getY());
+	        g2.translate(-camLocation2.x, -camLocation2.y);
+        }
+        
+        
         g2.drawImage(Images.backgrounds2[this.mapBackground], camLocation.x, camLocation.y, this.handler.getWidth(), this.handler.getHeight(),null);
         for (BaseStaticEntity block:blocksOnMap) {
             g2.drawImage(block.sprite,block.x,block.y,block.width,block.height,null);
@@ -136,17 +139,17 @@ public class Map {
             this.hand.render(g2);
             this.walls.render(g2);
         }
-//        if(handler.multiForLuigi) {
-//        handler.getLuigi().drawmario(g2);
-//        if(this.listener != null && MapBuilder.mapDone) {
-//            this.listener.render(g2);
-//            this.hand.render(g2);
-//            this.walls.render(g2);
-//        }
-//        g2.translate(camLocation.x, camLocation.y);}
+        if(handler.multiForLuigi) {
+        handler.getLuigi().drawmario(g2);
+        if(this.listener != null && MapBuilder.mapDone) {
+            this.listener.render(g2);
+            this.hand.render(g2);
+            this.walls.render(g2);
+        }
+        g2.translate(camLocation.x, camLocation.y);}
         
-    
-//        g2.translate(camLocation2.x, camLocation2.y);
+        if(handler.multiForLuigi) 
+        	g2.translate(camLocation2.x, camLocation2.y);
         
     }
 
