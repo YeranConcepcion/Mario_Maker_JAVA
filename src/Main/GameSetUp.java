@@ -1,13 +1,13 @@
 package Main;
 
 import java.awt.Graphics;
-
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
 import Display.DisplayScreen;
 import Display.MultiPScreen;
 import Display.UI.UIPointer;
+import Game.Entities.DynamicEntities.Luigi;
 import Game.Entities.DynamicEntities.Mario;
 import Game.Entities.DynamicEntities.Player;
 import Game.Entities.StaticEntities.BreakBlock;
@@ -21,6 +21,7 @@ import Game.World.MapBuilder;
 import Input.Camera;
 import Input.KeyManager;
 import Input.MouseManager;
+import Input.SecondCamera;
 import Resources.Images;
 import Resources.MusicHandler;
 
@@ -41,10 +42,10 @@ public class GameSetUp implements Runnable {
     public static boolean threadB;
 
     private BufferStrategy bs;
-// for the second screen
-    private BufferStrategy bs2;
     private Graphics g;
     public UIPointer pointer;
+// pointer for luigi
+    public UIPointer pointerL;
 
     //Input
     public KeyManager keyManager;
@@ -73,6 +74,9 @@ public class GameSetUp implements Runnable {
         initialmouseManager = mouseManager;
         musicHandler = new MusicHandler(handler);
         handler.setCamera(new Camera());
+        if(handler.multiForLuigi) {
+        	handler.setCamera2(new SecondCamera());
+        }
     }
 
     private void init(){
@@ -163,6 +167,8 @@ public class GameSetUp implements Runnable {
         if (handler.isInMap()) {
             updateCamera();
         }
+        
+      
         if(	handler.multiOn) {
         displayTwo = new MultiPScreen(title, handler.width, handler.height);
         displayTwo.getFrame().addKeyListener(keyManager);
@@ -171,9 +177,13 @@ public class GameSetUp implements Runnable {
         displayTwo.getCanvas().addMouseListener(mouseManager);
         displayTwo.getCanvas().addMouseMotionListener(mouseManager);
         handler.setMultiOn(false);
+        handler.setMultiForLuigi(true);
         multiAc = true;
 
         }
+//        if (handler.isInMap()&& handler.multiForLuigi) {
+//            updateCamera2();
+//        }
 
 
     }
@@ -199,23 +209,38 @@ public class GameSetUp implements Runnable {
         }
         handler.getCamera().moveCam(shiftAmount,shiftAmountY);
     }
+    
+    private void updateCamera2() {
+        Player luigi = handler.getLuigi();
+        double marioVelocityX = luigi.getVelX();
+        double marioVelocityY = luigi.getVelY();
+        double shiftAmount = 0;
+        double shiftAmountY = 0;
+
+        if (marioVelocityX > 0 && luigi.getX() - 2*(handler.getWidth()/3) > handler.getCamera2().getX()) {
+            shiftAmount = marioVelocityX;
+        }
+        if (marioVelocityX < 0 && luigi.getX() +  2*(handler.getWidth()/3) < handler.getCamera2().getX()+handler.width) {
+            shiftAmount = marioVelocityX;
+        }
+        if (marioVelocityY > 0 && luigi.getY() - 2*(handler.getHeight()/3) > handler.getCamera2().getY()) {
+            shiftAmountY = marioVelocityY;
+        }
+        if (marioVelocityX < 0 && luigi.getY() +  2*(handler.getHeight()/3) < handler.getCamera2().getY()+handler.height) {
+            shiftAmountY = -marioVelocityY;
+        }
+        handler.getCamera2().moveCam(shiftAmount,shiftAmountY);
+    }
 
     private void render(){
         bs = display.getCanvas().getBufferStrategy();
-        
-        bs2 = display.getCanvas().getBufferStrategy();
-
         if(bs == null){
             display.getCanvas().createBufferStrategy(3);
             return;
-        }
+            }
         
-        if(bs2 == null){
-            display.getCanvas().createBufferStrategy(3);
-            return;
-        }
         g = bs.getDrawGraphics();
-        g = bs2.getDrawGraphics();
+
         //Clear Screen
         g.clearRect(0, 0,  handler.width, handler.height);
 
@@ -227,7 +252,7 @@ public class GameSetUp implements Runnable {
 
         //End Drawing!
         bs.show();
-        bs2.show();
+
         g.dispose();
  // by yeran to draw on the second screen//
         if(multiAc) {
@@ -263,10 +288,17 @@ public class GameSetUp implements Runnable {
     		map.addBlock(new BreakBlock(0, i*MapBuilder.pixelMultiplier, 48,48, this.handler));
     		map.addBlock(new BreakBlock(30*MapBuilder.pixelMultiplier, i*MapBuilder.pixelMultiplier, 48,48, this.handler));
     	}
+    	
     	Mario mario = new Mario(24 * MapBuilder.pixelMultiplier, 196 * MapBuilder.pixelMultiplier, 48,48, this.handler);
     	map.addEnemy(mario);
-    	
         map.addEnemy(pointer);
+       
+// for luigi        
+       if(multiAc) {
+        	Luigi luigi = new Luigi(24 * MapBuilder.pixelMultiplier, 196 * MapBuilder.pixelMultiplier, 48,48, this.handler);
+        	map.addEnemy(luigi);
+            map.addEnemy(pointerL);
+        }
         threadB=true;
     	return map;
     }

@@ -19,6 +19,7 @@ public class GameState extends State {
     public GameState(Handler handler){
         super(handler);
         handler.getGame().pointer = new UIPointer(28 * MapBuilder.pixelMultiplier,197 * MapBuilder.pixelMultiplier,128,128,handler);
+        handler.getGame().pointerL = new UIPointer(28 * MapBuilder.pixelMultiplier,197 * MapBuilder.pixelMultiplier,128,128,handler);
 
     }
 
@@ -28,6 +29,10 @@ public class GameState extends State {
             State.setState(handler.getGame().pauseState);
         }
         handler.getMario().tick();
+//        
+//        if(handler.multiForLuigi) {
+//        	handler.getLuigi().tick();
+//        }
         if(handler.getMap().getListener() != null && MapBuilder.mapDone) {
         	handler.getMap().getListener().tick();
         	handler.getMap().getHand().tick();
