@@ -116,7 +116,11 @@ public class MenuState extends State {
 					}
 				}, handler,Color.BLACK));
 			}
-			if (mode.equals("Select")) {
+			
+			
+			
+			
+			if (mode.equals("Select")&& !(handler.multiOn)) {
 				mode = "Selecting";
 				uiManager = new UIManager(handler);
 				handler.getMouseManager().setUimanager(uiManager);
@@ -170,6 +174,69 @@ public class MenuState extends State {
 				}, handler,Color.BLACK));
 				uiManager.addObjects(this.but);
 			}
+			
+			
+			
+			
+			
+			
+			
+			
+			if (mode.equals("Select")&& handler.multiOn) {
+				mode = "Selecting";
+				uiManager = new UIManager(handler);
+				handler.getMouseManager().setUimanager(uiManager);
+
+				//New Map
+				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) - (64), 128, 64, "New Map", () -> {
+					if(!handler.isInMap()) {
+						mode = "Menu";
+						initNew("New Map Creator", handler);
+					}
+				}, handler,Color.BLACK));
+
+
+				//testMap1
+				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, handler.getHeight() / 2 + (handler.getHeight() / 10), 128, 64, "Race for the Star", () -> {
+					if(!handler.isInMap()) {
+						mode = "Menu";
+						handler.setMap(MapBuilder.createMap(Images.testMap, handler));
+						State.setState(handler.getGame().gameState);
+					}
+				}, handler,Color.BLACK));
+
+				//testmap2
+				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) + (64), 128, 64, "Coin Collection", () -> {
+					if(!handler.isInMap()) {
+						mode = "Menu";
+						handler.setMap(MapBuilder.createMap(Images.testMaptwo, handler));
+						State.setState(handler.getGame().gameState);
+					}
+				}, handler,Color.BLACK));
+
+				//other
+				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) + (128), 128, 64, "Other", () -> {
+					if(!handler.isInMap()){
+						mode = "Menu";
+						JFileChooser chooser = new JFileChooser("/maps");
+						FileNameExtensionFilter filter = new FileNameExtensionFilter(
+								"JPG, & PNG Images", "jpg", "png");
+						chooser.setFileFilter(filter);
+						int returnVal = chooser.showOpenDialog(null);
+						if (returnVal == JFileChooser.APPROVE_OPTION) {
+							System.out.println("You chose to open this file: " + chooser.getSelectedFile().getAbsolutePath());
+							try {
+								handler.setMap(MapBuilder.createMap(ImageIO.read(chooser.getSelectedFile()), handler));
+								State.setState(handler.getGame().gameState);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}
+					}
+				}, handler,Color.BLACK));
+				uiManager.addObjects(this.but);
+			}
+			
 			if (mode.equals("Selecting") && handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE) && (!handler.isInMap())) {
 				mode = "Menu";
 				uiManager = new UIManager(handler);
