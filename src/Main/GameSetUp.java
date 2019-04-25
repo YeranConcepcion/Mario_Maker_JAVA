@@ -81,7 +81,6 @@ public class GameSetUp implements Runnable {
         display.getCanvas().addMouseListener(mouseManager);
         display.getCanvas().addMouseMotionListener(mouseManager);
         
-// to make the second screen       
   
       
         Images img = new Images();
