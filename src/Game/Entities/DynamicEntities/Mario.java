@@ -14,6 +14,7 @@ public class Mario extends Player{
 	public boolean grabbed =false;
 	public int count = 0;
 	public boolean floating = false;
+	public boolean jumpCheck = false;
 
 	public Mario(int x, int y, int width, int height, Handler handler) {
 		super(x, y, width, height, handler, Images.marioSmallWalkRight[0]
@@ -29,22 +30,43 @@ public class Mario extends Player{
 			setDimension(new Dimension(width, this.height));
 		}
 	}
+	
+	// second jump method
+	
+	public void jump2() {
+        if(jumping) {
+        	velY=10;
+            handler.getGame().getMusicHandler().playJump();
+            jumping = true;
+        }
+		
+    }
 
 	@Override
 	public void tick(){
 	    if(!grabbed) {
             super.tick();
             if (!this.hit) {
-                if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE) && !handler.getKeyManager().up && !handler.getKeyManager().down) {
+                if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE) && this.jumping) {
+                    this.jump2();
+                    count = 0;
+                    System.out.println(count);
+                   
+                    
+                }
+                else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE) && !handler.getKeyManager().up && !handler.getKeyManager().down && !this.jumping) {
+                    
+                    count = count + 1;
+                    System.out.println(count);
+                    jumpCheck = false;
                     this.jump();
                 }
 //                if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_F) ) {
 //                    floating = true;
 //                    
 //                }
-//                
-           
-
+//               
+                
                 if (handler.getKeyManager().right && !handler.getKeyManager().up && !handler.getKeyManager().down) {
                     if (handler.getKeyManager().runbutt) {
                         velX = 6;
@@ -58,7 +80,10 @@ public class Mario extends Player{
                     }
                     facing = "Right";
                     moving = true;
-                } else if (handler.getKeyManager().left && !handler.getKeyManager().up && !handler.getKeyManager().down) {
+                 
+                    
+                } 
+                else if (handler.getKeyManager().left && !handler.getKeyManager().up && !handler.getKeyManager().down) {
                     if (handler.getKeyManager().runbutt) {
                         velX = -6;
                         running = true;
@@ -71,6 +96,7 @@ public class Mario extends Player{
                     }
                     facing = "Left";
                     moving = true;
+                   
                 } else {
                     velX = 0;
                     moving = false;
