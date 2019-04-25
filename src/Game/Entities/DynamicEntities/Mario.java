@@ -37,12 +37,10 @@ public class Mario extends Player{
             if (!this.hit) {
                 if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE) && !handler.getKeyManager().up && !handler.getKeyManager().down) {
                     this.jump();
+                    
+               
                 }
-//                if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_F) ) {
-//                    floating = true;
-//                    
-//                }
-//                
+            
            
 
                 if (handler.getKeyManager().right && !handler.getKeyManager().up && !handler.getKeyManager().down) {

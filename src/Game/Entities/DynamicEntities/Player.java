@@ -69,10 +69,13 @@ public class Player extends BaseDynamicEntity {
 
         for (BaseDynamicEntity entity : handler.getMap().getEnemiesOnMap()) {
         	
-        	if(entity instanceof Star) {
+        	if(entity instanceof Star && handler.multiForLuigi) {
         		if(entity.getBounds().intersects(handler.getMario().getBounds())) {
         			 State.setState(handler.getGame().MarioWins);
         		}
+        		if(entity.getBounds().intersects(handler.getLuigi().getBounds())) {
+       			 State.setState(handler.getGame().LuigiWins);
+       		}
         	}
             if (entity != null && getBounds().intersects(entity.getBounds()) && entity instanceof Item && !isBig) {
                 isBig = true;
@@ -175,6 +178,8 @@ public class Player extends BaseDynamicEntity {
             handler.getGame().getMusicHandler().playJump();
         }
     }
+    
+   
 
     public double getVelX() {
         return velX;

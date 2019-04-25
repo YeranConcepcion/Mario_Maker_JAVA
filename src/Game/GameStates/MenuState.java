@@ -256,7 +256,7 @@ public class MenuState extends State {
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.mushroom;
 		}
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)){
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)&& handler.multiForLuigi){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,5,90,0), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.star;
@@ -277,7 +277,7 @@ public class MenuState extends State {
 			display.getCanvas().setCursor(c);                                            //gray
 			colorSelected = MapBuilder.blackHoleBlock;
 		}
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_T)){
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_T) ){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0,0,102), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);                                          
 			colorSelected = MapBuilder.turtle;
@@ -347,8 +347,8 @@ public class MenuState extends State {
 					"7 -> Goomba (Brown)\n"+
 					"8 -> RainBow Block (Pink)\n"+
 					"9 -> Black Hole Block (Gray)\n"+
-					"T -> Turtle (Dark Blue)\n"+
-					"S -> Star (Golden)"
+					"T -> Turtle (Dark Blue)\n"
+					
 					);
 		}
 		
@@ -367,6 +367,7 @@ public class MenuState extends State {
 					"8 -> RainBow Block (Pink)\n"+
 					"9 -> Black Hole Block (Gray)\n"+
 					"T -> Turtle (Dark Blue)\n"+
+					"S -> Star (Golden)\n"+
 					"L -> Luigi (Green)"
 					);
 		}
