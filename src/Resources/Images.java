@@ -54,6 +54,8 @@ public class Images {
     public static BufferedImage Pause;
   // to make the game over state
     public static BufferedImage GameOver;
+    public static BufferedImage Lwins;
+    public static BufferedImage Mwins;
     
     public static BufferedImage Cursor;
 
@@ -69,6 +71,7 @@ public class Images {
     public static BufferedImage surfaceBlock;
     public static BufferedImage boundBlock;
     public static BufferedImage mushroom;
+    public static BufferedImage star;
     public static BufferedImage goombaDies;
     public static BufferedImage turtleDies;
    
@@ -135,6 +138,8 @@ public class Images {
             title = mainmenuSpriteSheet.crop(16,16,256,224);
             Pause = ImageIO.read(getClass().getResourceAsStream("/Sheets/Pause.png"));
             GameOver = ImageIO.read(getClass().getResourceAsStream("/Sheets/gameOverMario.jpg"));
+            Lwins = ImageIO.read(getClass().getResourceAsStream("/Sheets/LugiWinBK.png"));
+            Mwins = ImageIO.read(getClass().getResourceAsStream("/Sheets/MarioWinBK.jpg"));
             
             Cursor = ImageIO.read(getClass().getResourceAsStream("/Sheets/cursor.png"));
             butstart[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/NormBut.png"));//normbut
@@ -321,6 +326,7 @@ public class Images {
 
             //items
             mushroom = interactableSpriteSheet.crop(112,34,16,16);
+            star = ImageIO.read(getClass().getResourceAsStream("/Sheets/star.png"));
 
             //enemy
             goomba[0]=goombaSpriteSheet.crop(119,40,162,162);

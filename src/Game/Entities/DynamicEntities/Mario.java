@@ -12,6 +12,8 @@ public class Mario extends Player{
 
 	private boolean hit = false;
 	public boolean grabbed =false;
+	public int count = 0;
+	public boolean floating = false;
 
 	public Mario(int x, int y, int width, int height, Handler handler) {
 		super(x, y, width, height, handler, Images.marioSmallWalkRight[0]
@@ -36,6 +38,12 @@ public class Mario extends Player{
                 if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_SPACE) && !handler.getKeyManager().up && !handler.getKeyManager().down) {
                     this.jump();
                 }
+                if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_F) ) {
+                    floating = true;
+                    
+                }
+                
+           
 
                 if (handler.getKeyManager().right && !handler.getKeyManager().up && !handler.getKeyManager().down) {
                     if (handler.getKeyManager().runbutt) {
@@ -78,6 +86,11 @@ public class Mario extends Player{
                 if (falling) {
                     y = (int) (y + velY);
                     velY = velY + gravityAcc;
+                }
+                
+                if (falling && floating) {
+                    y = (int) (y + velY);
+                    velY = velY + gravityAcc-11;
                 }
                 x += velX;
             } else {

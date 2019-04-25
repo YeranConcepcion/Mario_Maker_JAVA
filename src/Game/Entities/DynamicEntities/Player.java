@@ -2,6 +2,7 @@ package Game.Entities.DynamicEntities;
 
 import Game.Entities.EntityBase;
 import Game.Entities.StaticEntities.BaseStaticEntity;
+import Game.GameStates.State;
 import Main.Handler;
 import Resources.Animation;
 
@@ -67,6 +68,12 @@ public class Player extends BaseDynamicEntity {
     private void checkItemCollision() {
 
         for (BaseDynamicEntity entity : handler.getMap().getEnemiesOnMap()) {
+        	
+        	if(entity instanceof Star) {
+        		if(entity.getBounds().intersects(handler.getMario().getBounds())) {
+        			 State.setState(handler.getGame().MarioWins);
+        		}
+        	}
             if (entity != null && getBounds().intersects(entity.getBounds()) && entity instanceof Item && !isBig) {
                 isBig = true;
                 this.y -= 8;

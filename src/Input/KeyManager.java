@@ -44,14 +44,14 @@ public class KeyManager implements KeyListener {
 
 		pbutt = keys[KeyEvent.VK_ESCAPE];
 		runbutt = keys[KeyEvent.VK_SHIFT];
-		
+// for luigi	
 		upl =  keys[KeyEvent.VK_UP];
 		downl =  keys[KeyEvent.VK_DOWN];
 		leftl =  keys[KeyEvent.VK_LEFT];
 		rightl =keys[KeyEvent.VK_RIGHT];
 
 		
-//		runbutt = keys[KeyEvent.];
+		runbuttl = keys[KeyEvent.VK_SLASH];
 
 	}
 

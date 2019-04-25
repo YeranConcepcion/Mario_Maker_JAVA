@@ -256,6 +256,11 @@ public class MenuState extends State {
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.mushroom;
 		}
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,5,90,0), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);
+			colorSelected = MapBuilder.star;
+		}
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_7)){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,06549f,0.05882f,0.003921f), new Point(0, 0), "cursor1");
 			display.getCanvas().setCursor(c);
@@ -273,8 +278,8 @@ public class MenuState extends State {
 			colorSelected = MapBuilder.blackHoleBlock;
 		}
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_T)){
-			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0,1,0), new Point(0, 0), "cursor1");
-			display.getCanvas().setCursor(c);                                      //green      
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0,0,102), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);                                          
 			colorSelected = MapBuilder.turtle;
 		}
 
@@ -287,7 +292,7 @@ public class MenuState extends State {
 			clicked=true;
 		}
 
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)){
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER) && !handler.multiForLuigi){
 			for (int i = 0; i < GridWidthPixelCount; i++) {
 				for (int j = 0; j < GridHeightPixelCount; j++) {
 					if(blocks[i][j]!=null && blocks[i][j].equals(new Color(MapBuilder.mario)) && blocks[i][j+1]!=null&& !blocks[i][j+1].equals(new Color(MapBuilder.mario))){
@@ -302,7 +307,34 @@ public class MenuState extends State {
 				}
 			}
 			JOptionPane.showMessageDialog(display.getFrame(), "You cant have a map without at least a Mario and a floor right under him. (1 for Mario)");
+			
 		}
+		
+		
+		
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER) && handler.multiForLuigi){
+			for (int i = 0; i < GridWidthPixelCount; i++) {
+				for (int j = 0; j < GridHeightPixelCount; j++) {
+					if(blocks[i][j]!=null && blocks[i][j].equals(new Color(MapBuilder.luigi)) && blocks[i][j+1]!=null&& !blocks[i][j+1].equals(new Color(MapBuilder.luigi))){
+						
+						handler.setMap(MapBuilder.createMap(createImage(GridWidthPixelCount,GridHeightPixelCount,blocks,JOptionPane.showInputDialog("Enter file name: ","Mario Heaven")), handler));
+						State.setState(handler.getGame().gameState);
+						creatingMap=false;
+						display.getFrame().setVisible(false);
+						display.getFrame().dispose();
+						handler.getGame().mouseManager=handler.getGame().initialmouseManager;
+						return;
+					}
+					
+				}
+			}
+			JOptionPane.showMessageDialog(display.getFrame(), "You cant have a map without at least a Mario and a Luigi and a floor right under them. (1 for Mario), ( L for Luigi)");
+		
+		}
+		
+
+		
+		
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H) && !handler.multiForLuigi){
 			JOptionPane.showMessageDialog(display.getFrame(), "Number key <-> Color Mapping: \n" +
 					"0 -> Erase \n" +
@@ -315,7 +347,8 @@ public class MenuState extends State {
 					"7 -> Goomba (Brown)\n"+
 					"8 -> RainBow Block (Pink)\n"+
 					"9 -> Black Hole Block (Gray)\n"+
-					"T -> Turtle (Green)"
+					"T -> Turtle (Dark Blue)\n"+
+					"S -> Star (Golden)"
 					);
 		}
 		
@@ -333,7 +366,7 @@ public class MenuState extends State {
 					"7 -> Goomba (Brown)\n"+
 					"8 -> RainBow Block (Pink)\n"+
 					"9 -> Black Hole Block (Gray)\n"+
-					"T -> Turtle (Green)\n"+
+					"T -> Turtle (Dark Blue)\n"+
 					"L -> Luigi (Green)"
 					);
 		}

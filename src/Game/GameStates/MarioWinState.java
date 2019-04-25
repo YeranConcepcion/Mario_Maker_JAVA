@@ -1,7 +1,7 @@
 package Game.GameStates;
 
-
 import Main.Handler;
+
 
 import Resources.Images;
 import Display.UI.UIManager;
@@ -9,13 +9,11 @@ import Display.UI.UIStringButton;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+public class MarioWinState extends State{
 
-public class GameOverState extends State{
-	
-	
 	   private UIManager uiManager;
 
-	    public GameOverState(Handler handler) {
+	    public MarioWinState(Handler handler) {
 	        super(handler);
 	        uiManager = new UIManager(handler);
 	        handler.getMouseManager().setUimanager(uiManager);
@@ -44,7 +42,7 @@ public class GameOverState extends State{
 
 	    @Override
 	    public void render(Graphics g) {
-	        g.drawImage(Images.GameOver,0,0,handler.getWidth(),handler.getHeight(),null);
+	        g.drawImage(Images.Mwins,0,0,handler.getWidth(),handler.getHeight(),null);
 	        uiManager.Render(g);
 	    }
 }

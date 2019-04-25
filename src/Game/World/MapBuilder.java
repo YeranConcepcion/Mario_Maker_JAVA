@@ -8,6 +8,7 @@ import Game.Entities.DynamicEntities.Goomba;
 import Game.Entities.DynamicEntities.Luigi;
 import Game.Entities.DynamicEntities.Mario;
 import Game.Entities.DynamicEntities.Mushroom;
+import Game.Entities.DynamicEntities.Star;
 import Game.Entities.DynamicEntities.Turtle;
 import Game.Entities.StaticEntities.BaseStaticEntity;
 import Game.Entities.StaticEntities.BlackHole;
@@ -28,10 +29,11 @@ public class MapBuilder {
 	public static int breakBlock = new Color(0,38,255).getRGB();
 	public static int misteryBlock = new Color(255,216,0).getRGB();
 	public static int mushroom = new Color(178,0,255).getRGB();
+	public static int star = new Color(246,207,10).getRGB();//gold
 	public static int goomba = new Color(167,15,1).getRGB();
 	
 // by yeran 
-	public static int turtle = new Color(51,255,51).getRGB();// green
+	public static int turtle = new Color(0,0,102).getRGB();// green
 	public static int luigi = new Color(51,255,51).getRGB();
 	public static int rainbowBlock = new Color(204,0,204).getRGB();// pink
 	public static int blackHoleBlock = new Color(160,160,160).getRGB();// gray
@@ -87,7 +89,12 @@ public class MapBuilder {
 				}else if(currentPixel == mushroom){
 					BaseDynamicEntity Mushroom = new Mushroom(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addEnemy(Mushroom);
-				}else if(currentPixel == goomba){
+				}else if(currentPixel == star){
+					BaseDynamicEntity star = new Star(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					mapInCreation.addEnemy(star);
+				}
+				
+				else if(currentPixel == goomba){
 					BaseDynamicEntity Goomba = new Goomba(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addEnemy(Goomba);
 				}

@@ -28,18 +28,29 @@ public class Luigi extends Player{
 			setDimension(new Dimension(width, this.height));
 		}
 	}
+	  public void jumpH() {
+	        if(!jumping && !falling){
+	            jumping=true;
+	            velY=15;
+	            handler.getGame().getMusicHandler().playJump();
+	        }
+	    }
 
 	@Override
 	public void tick(){
 	    if(!grabbed) {
             super.tick();
             if (!this.hit) {
-                if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_CONTROL) && !handler.getKeyManager().up && !handler.getKeyManager().down) {
+                if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_CONTROL) && !handler.getKeyManager().upl && !handler.getKeyManager().downl) {
                     this.jump();
                 }
+                
+                if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER) && !handler.getKeyManager().upl && !handler.getKeyManager().downl) {
+                    this.jumpH();
+                }
 
-                if (handler.getKeyManager().right && !handler.getKeyManager().up && !handler.getKeyManager().down) {
-                    if (handler.getKeyManager().runbutt) {
+                if (handler.getKeyManager().rightl && !handler.getKeyManager().upl && !handler.getKeyManager().downl) {
+                    if (handler.getKeyManager().runbuttl) {
                         velX = 6;
                         running = true;
                     } else {
@@ -51,8 +62,8 @@ public class Luigi extends Player{
                     }
                     facing = "Right";
                     moving = true;
-                } else if (handler.getKeyManager().left && !handler.getKeyManager().up && !handler.getKeyManager().down) {
-                    if (handler.getKeyManager().runbutt) {
+                } else if (handler.getKeyManager().leftl && !handler.getKeyManager().upl && !handler.getKeyManager().downl) {
+                    if (handler.getKeyManager().runbuttl) {
                         velX = -6;
                         running = true;
                     } else {
@@ -91,13 +102,13 @@ public class Luigi extends Player{
 	public void drawmario(Graphics2D g2) {
 		if(!grabbed) {
 			if (!isBig) {
-				if (handler.getKeyManager().up) {
+				if (handler.getKeyManager().upl) {
 					if (facing.equals("Left")) {
 						g2.drawImage(Images.tint(Images.marioSmallJumpLeft[2], 0, 1, 0), x, y, width, height, null);
 					} else {
 						g2.drawImage(Images.tint(Images.marioSmallJumpRight[2], 0, 1, 0), x, y, width, height, null);
 					}
-				} else if (handler.getKeyManager().down) {
+				} else if (handler.getKeyManager().downl) {
 					if (facing.equals("Left")) {
 						g2.drawImage(Images.tint(Images.marioSmallJumpLeft[3], 0, 1, 0), x, y, width, height, null);
 					} else {
@@ -105,9 +116,9 @@ public class Luigi extends Player{
 					}
 				} else if (!jumping && !falling) {
 					if (facing.equals("Left") && moving) {
-						g2.drawImage(playerSmallLeftAnimation.getCurrentFrame(), x, y, width, height, null);
+						g2.drawImage(Images.tint(playerSmallLeftAnimation.getCurrentFrame(),0,1,0), x, y, width, height, null);
 					} else if (facing.equals("Right") && moving) {
-						g2.drawImage(playerSmallRightAnimation.getCurrentFrame(), x, y, width, height, null);
+						g2.drawImage(Images.tint(playerSmallRightAnimation.getCurrentFrame(),0,1,0), x, y, width, height, null);
 					}
 					if (facing.equals("Left") && !moving) {
 						g2.drawImage(Images.tint(Images.marioSmallWalkLeft[0], 0, 1, 0), x, y, width, height, null);
@@ -132,13 +143,13 @@ public class Luigi extends Player{
 				}
 			} else {
 				if (!changeDirrection) {
-					if (handler.getKeyManager().up) {
+					if (handler.getKeyManager().upl) {
 						if (facing.equals("Left")) {
 							g2.drawImage(Images.tint(Images.marioBigJumpLeft[4], 0, 1, 0), x, y, width, height, null);
 						} else {
 							g2.drawImage(Images.tint(Images.marioBigJumpRight[4], 0, 1, 0), x, y, width, height, null);
 						}
-					} else if (handler.getKeyManager().down) {
+					} else if (handler.getKeyManager().downl) {
 						if (facing.equals("Left")) {
 							g2.drawImage(Images.tint(Images.marioBigJumpLeft[3], 0, 1, 0), x, y, width, height, null);
 						} else {

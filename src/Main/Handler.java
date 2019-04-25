@@ -1,6 +1,7 @@
 package Main;
 
 import java.awt.GraphicsDevice;
+
 import java.awt.GraphicsEnvironment;
 
 import Game.Entities.DynamicEntities.Luigi;

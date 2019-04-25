@@ -1,6 +1,5 @@
 package Game.GameStates;
 
-
 import Main.Handler;
 
 import Resources.Images;
@@ -9,13 +8,11 @@ import Display.UI.UIStringButton;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+public class LuigiWinState extends State{
 
-public class GameOverState extends State{
-	
-	
 	   private UIManager uiManager;
 
-	    public GameOverState(Handler handler) {
+	    public LuigiWinState(Handler handler) {
 	        super(handler);
 	        uiManager = new UIManager(handler);
 	        handler.getMouseManager().setUimanager(uiManager);
@@ -44,7 +41,7 @@ public class GameOverState extends State{
 
 	    @Override
 	    public void render(Graphics g) {
-	        g.drawImage(Images.GameOver,0,0,handler.getWidth(),handler.getHeight(),null);
+	        g.drawImage(Images.Lwins,0,0,handler.getWidth(),handler.getHeight(),null);
 	        uiManager.Render(g);
 	    }
 }

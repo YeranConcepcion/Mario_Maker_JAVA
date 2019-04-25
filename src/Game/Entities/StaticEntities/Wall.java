@@ -52,11 +52,35 @@ public class Wall {
 	}
 
 	public void tick() {
+//for luigi		
+		if(handler.multiForLuigi) {
+			this.rand = new Random();
+			this.setX((int) this.handler.getCamera2().getX());
+			this.setY((int) this.handler.getCamera2().getY());
+			this.size = this.handler.getWidth();
+			this.d = this.rand.nextInt(2);
+			this.anim = new Animation(25, Images.hitWall);
+			this.setSY((int) (this.handler.getCamera2().getY() + this.handler.getHeight() / 2 + 50));
+			this.rect = new Rectangle(38 * MapBuilder.pixelMultiplier, 90 * MapBuilder.pixelMultiplier, 440, 50);
+		}
+		
+		
+		
+		
 		if(this.handler.getMario().getHit() && this.getRect().intersects(this.handler.getMario().getBounds())) {
 			this.getRect().setBounds(0, 0, 0, 0);
 			this.handler.getGame().getMusicHandler().play("finished");
 			this.setPlay(true);
 		}
+//for luigi
+		if(handler.multiForLuigi)
+		if(this.handler.getLuigi().getHit() && this.getRect().intersects(this.handler.getLuigi().getBounds())) {
+			this.getRect().setBounds(0, 0, 0, 0);
+			this.handler.getGame().getMusicHandler().play("finished");
+			this.setPlay(true);
+		}
+		
+		
 		if(this.anim.getIndex() == Images.hitWall.length - 1) {
 			this.setPlay(false);
 			if(this.d == 0) this.handler.getGame().getMusicHandler().play("defeated");
@@ -64,14 +88,18 @@ public class Wall {
 			this.anim.end();
 			this.draw = true;
 		}
+		
 		if(this.play) this.anim.tick();
 		this.setX((int) this.handler.getCamera().getX());
 		this.setY((int) this.handler.getCamera().getY());
 		this.setSY((int) (this.handler.getCamera().getY() + this.handler.getHeight() / 2 + 50));
+		
 		if(this.handler.getMario().getHit()){
 			str="";
 			for (int i:alf5) { str+=(char)i;}str+="!";
 		}
+		
+		
 		else if(!this.handler.getMario().getHit()&& handler.getMario().getVelY()==0){
 			str="";
 			for (int i:alf) { str+=(char)i;}str+="! ";
@@ -80,6 +108,32 @@ public class Wall {
 			for (int i:alf4) { str2+=(char)i;}str2+=" ";
 
 		}
+//for luigi
+		if(handler.multiForLuigi) {
+			if(this.play) this.anim.tick();
+			this.setX((int) this.handler.getCamera2().getX());
+			this.setY((int) this.handler.getCamera2().getY());
+			this.setSY((int) (this.handler.getCamera2().getY() + this.handler.getHeight() / 2 + 50));
+			
+			if(this.handler.getLuigi().getHit()){
+				str="";
+				for (int i:alf5) { str+=(char)i;}str+="!";
+			}
+			
+			
+			else if(!this.handler.getLuigi().getHit()&& handler.getLuigi().getVelY()==0){
+				str="";
+				for (int i:alf) { str+=(char)i;}str+="! ";
+				for (int i:alf2) { str2+=(char)i;}str2+=" ";
+				for (int i:alf3) { str2+=(char)i;}str2+=" ";
+				for (int i:alf4) { str2+=(char)i;}str2+=" ";
+
+			}
+			
+			
+			
+		}
+		
 		if(this.opacity >= 254) this.opacity = 255;
 		if(this.opacity == 255) {
 			this.alpha +=2;
