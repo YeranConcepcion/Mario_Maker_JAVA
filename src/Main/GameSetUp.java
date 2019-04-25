@@ -282,8 +282,11 @@ public class GameSetUp implements Runnable {
 			//Draw Here!
 			g2 = (Graphics2D) g.create();
 
-			if(State.getState() != null)
-				State.getState().render(gl);
+			if(State.getState() != null) {
+				if(State.getState().equals(gameState)){
+					((GameState) gameState).renderL(gl);
+				}
+				}
 
 			//End Drawing!
 			bsl.show();

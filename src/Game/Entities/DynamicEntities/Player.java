@@ -1,14 +1,14 @@
 package Game.Entities.DynamicEntities;
 
-import Game.Entities.EntityBase;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
 import Game.Entities.StaticEntities.BaseStaticEntity;
 import Game.GameStates.State;
 import Main.Handler;
 import Resources.Animation;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 public class Player extends BaseDynamicEntity {
 
@@ -108,7 +108,7 @@ public class Player extends BaseDynamicEntity {
 
         for (BaseDynamicEntity enemy : enemies) {
             Rectangle enemyTopBounds = enemy.getTopBounds();
-            if (marioBottomBounds.intersects(enemyTopBounds) && !(enemy instanceof Item)) {
+            if (marioBottomBounds.intersects(enemyTopBounds) && !(enemy instanceof Item) && !(enemy instanceof Luigi) && !(enemy instanceof Mario)) {
                 if(!enemy.ded) {
                     handler.getGame().getMusicHandler().playStomp();
                 }

@@ -46,8 +46,14 @@ public class GameState extends State {
     @Override
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
-        Graphics2D g3 = (Graphics2D) g.create();
-        handler.getMap().drawMap(g2,g3);
+        
+        handler.getMap().drawMap(g2);
+    }
+    
+    public void renderL(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g.create();
+        
+        handler.getMap().drawMapforLuigi(g2);
     }
 
 }
