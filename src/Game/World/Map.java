@@ -89,8 +89,8 @@ public class Map {
         Point camLocation2 = null;
         if(handler.multiForLuigi) {
 	        camLocation2 = new Point((int)handler.getCamera2().getX(), (int)handler.getCamera2().getY());
-	        g2.translate(-camLocation2.x, -camLocation2.y);
-	        g2.drawImage(Images.backgrounds2[this.mapBackground], camLocation2.x, camLocation2.y, this.handler.getWidth(), this.handler.getHeight(),null);
+	        g3.translate(-camLocation2.x, -camLocation2.y);
+	        g3.drawImage(Images.backgrounds2[this.mapBackground], camLocation2.x, camLocation2.y, this.handler.getWidth(), this.handler.getHeight(),null);
         }
         
         
@@ -98,6 +98,10 @@ public class Map {
         
         for (BaseStaticEntity block:blocksOnMap) {
             g2.drawImage(block.sprite,block.x,block.y,block.width,block.height,null);
+        }
+        
+        for (BaseStaticEntity block:blocksOnMap) {
+            g3.drawImage(block.sprite,block.x,block.y,block.width,block.height,null);
         }
         
 // by yeran to implement the game over state  
@@ -196,8 +200,8 @@ public class Map {
         } g2.translate(camLocation.x, camLocation.y);
         
         if(handler.multiForLuigi) {
-        handler.getLuigi().drawmario(g2);
-        handler.getMario().drawMario(g2);
+        handler.getLuigi().drawmario(g3);
+        handler.getMario().drawMario(g3);
 
        }
         
