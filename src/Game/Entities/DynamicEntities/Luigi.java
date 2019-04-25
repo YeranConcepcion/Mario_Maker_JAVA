@@ -157,15 +157,15 @@ public class Luigi extends Player{
 						}
 					} else if (!jumping && !falling) {
 						if (facing.equals("Left") && moving && running) {
-							g2.drawImage(playerBigLeftRunAnimation.getCurrentFrame(), x, y, width, height, null);
+							g2.drawImage(Images.tint(playerBigLeftRunAnimation.getCurrentFrame(),0,1,1), x, y, width, height, null);
 						} else if (facing.equals("Left") && moving && !running) {
-							g2.drawImage(playerBigLeftWalkAnimation.getCurrentFrame(), x, y, width, height, null);
+							g2.drawImage(Images.tint(playerBigLeftWalkAnimation.getCurrentFrame(),0,1,0), x, y, width, height, null);
 						} else if (facing.equals("Left") && !moving) {
 							g2.drawImage(Images.tint(Images.marioBigWalkLeft[0], 0, 1, 0), x, y, width, height, null);
 						} else if (facing.equals("Right") && moving && running) {
-							g2.drawImage(playerBigRightRunAnimation.getCurrentFrame(), x, y, width, height, null);
+							g2.drawImage(Images.tint(playerBigRightRunAnimation.getCurrentFrame(),0,1,0), x, y, width, height, null);
 						} else if (facing.equals("Right") && moving && !running) {
-							g2.drawImage(playerBigRightWalkAnimation.getCurrentFrame(), x, y, width, height, null);
+							g2.drawImage(Images.tint(playerBigRightWalkAnimation.getCurrentFrame(),0,1,0), x, y, width, height, null);
 						} else if (facing.equals("Right") && !moving) {
 							g2.drawImage(Images.tint(Images.marioBigWalkRight[0], 0, 1, 0), x, y, width, height, null);
 						}
