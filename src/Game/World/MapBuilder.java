@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import Game.Entities.DynamicEntities.BaseDynamicEntity;
 import Game.Entities.DynamicEntities.Goomba;
+import Game.Entities.DynamicEntities.Luigi;
 import Game.Entities.DynamicEntities.Mario;
 import Game.Entities.DynamicEntities.Mushroom;
 import Game.Entities.DynamicEntities.Turtle;
@@ -31,6 +32,7 @@ public class MapBuilder {
 	
 // by yeran 
 	public static int turtle = new Color(51,255,51).getRGB();// green
+	public static int luigi = new Color(51,255,51).getRGB();
 	public static int rainbowBlock = new Color(204,0,204).getRGB();// pink
 	public static int blackHoleBlock = new Color(160,160,160).getRGB();// gray
 	
@@ -51,7 +53,15 @@ public class MapBuilder {
 				}else if(currentPixel == mario){
 					BaseDynamicEntity Mario = new Mario(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addEnemy(Mario);
-				}else if(currentPixel == surfaceBlock){
+				}
+//for luigi				
+				else if(currentPixel == luigi){
+					BaseDynamicEntity Luigi = new Luigi(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					mapInCreation.addEnemy(Luigi);
+				}
+				
+				
+				else if(currentPixel == surfaceBlock){
 					BaseStaticEntity SurfaceBlock = new SurfaceBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(SurfaceBlock);
 				}

@@ -1,14 +1,15 @@
 package Main;
 
-import Game.Entities.DynamicEntities.Mario;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 
+import Game.Entities.DynamicEntities.Luigi;
+import Game.Entities.DynamicEntities.Mario;
 import Game.World.Map;
 import Input.Camera;
-import Input.SecondCamera;
 import Input.KeyManager;
 import Input.MouseManager;
-
-import java.awt.*;
+import Input.SecondCamera;
 
 
 /**
@@ -21,8 +22,18 @@ public class Handler {
     public static final int DEFAULTWIDTH = gd.getDisplayMode().getWidth();
     public static final int DEFAULTHEIGHT = gd.getDisplayMode().getHeight();
     public boolean multiOn = false;
+    public boolean multiForLuigi = false;
+    
 
-    public boolean isMultiOn() {
+    public boolean isMultiForLuigi() {
+		return multiForLuigi;
+	}
+
+	public void setMultiForLuigi(boolean multiForLuigi) {
+		this.multiForLuigi = multiForLuigi;
+	}
+
+	public boolean isMultiOn() {
 		return multiOn;
 	}
 
@@ -34,6 +45,7 @@ public class Handler {
 
     private GameSetUp game;
     private Mario mario;
+    private Luigi luigi;
     private Map map;
     private boolean marioInMap =false;
 
@@ -81,6 +93,15 @@ public class Handler {
     public void setMario(Mario mario) {
         this.mario = mario;
     }
+//for luigi
+    public Luigi getLuigi() {
+        return luigi;
+    }
+
+    public void setLuigi(Luigi luigi) {
+        this.luigi = luigi;
+    }
+
 
     public Map getMap() {
         return map;

@@ -10,6 +10,7 @@ import Display.UI.UIPointer;
 import Game.Entities.DynamicEntities.BaseDynamicEntity;
 import Game.Entities.DynamicEntities.Goomba;
 import Game.Entities.DynamicEntities.Item;
+import Game.Entities.DynamicEntities.Luigi;
 import Game.Entities.DynamicEntities.Mario;
 import Game.Entities.DynamicEntities.Turtle;
 import Game.Entities.StaticEntities.BaseStaticEntity;
@@ -55,7 +56,15 @@ public class Map {
             handler.getCamera().setX(handler.getMario().x- (MapBuilder.pixelMultiplier*6));
             handler.getCamera().setY(handler.getMario().y - (MapBuilder.pixelMultiplier*10));
             bottomBorder=handler.getHeight()+handler.getMario().y;
-        }else {
+        }
+  //////////////////////////////////////////////////////////////////////////////////////////
+        if(entity instanceof Luigi && handler.multiForLuigi){
+            handler.setLuigi((Luigi) entity);
+            handler.getCamera2().setX(handler.getLuigi().x- (MapBuilder.pixelMultiplier*6));
+            handler.getCamera2().setY(handler.getLuigi().y - (MapBuilder.pixelMultiplier*10));
+            bottomBorder=handler.getHeight()+handler.getLuigi().y;
+        }
+        else {
             enemiesOnMap.add(entity);
         }
     }
@@ -64,14 +73,24 @@ public class Map {
         handler.setIsInMap(true);
         Point camLocation = new Point((int)handler.getCamera().getX(), (int)handler.getCamera().getY());
         g2.translate(-camLocation.x, -camLocation.y);
+     // for the luigi camera   
+        
+        Point camLocation2 = null;
+        if(handler.multiForLuigi) {
+	        camLocation2 = new Point((int)handler.getCamera2().getX(), (int)handler.getCamera2().getY());
+	        g2.translate(-camLocation2.x, -camLocation2.y);
+        }
+        
+        
         g2.drawImage(Images.backgrounds2[this.mapBackground], camLocation.x, camLocation.y, this.handler.getWidth(), this.handler.getHeight(),null);
         for (BaseStaticEntity block:blocksOnMap) {
             g2.drawImage(block.sprite,block.x,block.y,block.width,block.height,null);
         }
+        
 // by yeran to implement the game over state        
         for (BaseStaticEntity blocks: blocksOnMap) {
     		if(blocks instanceof BoundBlock || blocks instanceof  BlackHole ) {
-    			if(blocks.getBounds().intersects(handler.getMario().getBounds())) {
+    			if(blocks.getBounds().intersects(handler.getMario().getBounds()) ) {
     				 State.setState(handler.getGame().GameOver);
     			}
     		}
@@ -88,17 +107,17 @@ public class Map {
                 	 State.setState(handler.getGame().GameOver);
                 	
                 }
-                else if(entity.getLeftBounds().intersects(handler.getMario().getRightBounds())) {
+                else if(entity.getLeftBounds().intersects(handler.getMario().getRightBounds()) ) {
                 	State.setState(handler.getGame().GameOver);
                 }
             }
 // by yeran to choose the correct animation         
             else if(entity instanceof Turtle && !entity.ded){
-            	   if(entity.getRightBounds().intersects(handler.getMario().getLeftBounds())) {
+            	   if(entity.getRightBounds().intersects(handler.getMario().getLeftBounds()) ) {
                   	 State.setState(handler.getGame().GameOver);
                   	
                   }
-                  if(entity.getLeftBounds().intersects(handler.getMario().getRightBounds())) {
+                  if(entity.getLeftBounds().intersects(handler.getMario().getRightBounds()) ) {
                   	State.setState(handler.getGame().GameOver);
                   }
             	if(entity.getDirection().equals("Right")) {
@@ -120,7 +139,18 @@ public class Map {
             this.hand.render(g2);
             this.walls.render(g2);
         }
-        g2.translate(camLocation.x, camLocation.y);
+        if(handler.multiForLuigi) {
+        handler.getLuigi().drawmario(g2);
+        if(this.listener != null && MapBuilder.mapDone) {
+            this.listener.render(g2);
+            this.hand.render(g2);
+            this.walls.render(g2);
+        }
+        g2.translate(camLocation.x, camLocation.y);}
+        
+        if(handler.multiForLuigi) 
+        	g2.translate(camLocation2.x, camLocation2.y);
+        
     }
 
     public ArrayList<BaseStaticEntity> getBlocksOnMap() {
