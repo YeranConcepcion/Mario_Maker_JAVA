@@ -87,15 +87,15 @@ public class Map {
 
 		for (BaseStaticEntity blocks: blocksOnMap) {
 			if(blocks instanceof BoundBlock || blocks instanceof  BlackHole && !handler.multiForLuigi ) {
-				if(blocks.getBounds().intersects(handler.getMario().getBounds()) || blocks.getBounds().intersects(handler.getLuigi().getBounds()) ) {
+				if(blocks.getBounds().intersects(handler.getMario().getBounds()) ) {
 					State.setState(handler.getGame().GameOver);
 				}
 			}
 		}
-		if(!handler.multiForLuigi) {
+		if(handler.multiForLuigi) {
 			for (BaseStaticEntity blocks: blocksOnMap) {
 				if(blocks instanceof BoundBlock || blocks instanceof  BlackHole) {
-					if(blocks.getBounds().intersects(handler.getMario().getBounds()) ) {
+					if(blocks.getBounds().intersects(handler.getMario().getBounds())   ) {
 						State.setState(handler.getGame().GameOver);
 					}
 				}
@@ -111,10 +111,10 @@ public class Map {
 				g2.drawImage(((Goomba)entity).anim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
 				//by yeran to invoke the game over state
 				if(handler.multiForLuigi) {
-					if(entity.getRightBounds().intersects(handler.getMario().getLeftBounds()) ||entity.getRightBounds().intersects(handler.getLuigi().getLeftBounds())) {
+					if(entity.getRightBounds().intersects(handler.getMario().getLeftBounds())) {
 						State.setState(handler.getGame().GameOver);
 					}
-					else if(entity.getLeftBounds().intersects(handler.getMario().getRightBounds()) || entity.getLeftBounds().intersects(handler.getLuigi().getRightBounds())) {
+					else if(entity.getLeftBounds().intersects(handler.getMario().getRightBounds()) ) {
 						State.setState(handler.getGame().GameOver);
 					}}
 
@@ -130,7 +130,7 @@ public class Map {
 			//by yeran to choose the correct animation         
 			else if(entity instanceof Turtle && !entity.ded){
 				if(handler.multiForLuigi) {
-					if(entity.getRightBounds().intersects(handler.getMario().getLeftBounds()) || entity.getRightBounds().intersects(handler.getLuigi().getLeftBounds()) ) {
+					if(entity.getRightBounds().intersects(handler.getMario().getLeftBounds()) ) {
 						State.setState(handler.getGame().GameOver);
 
 					}}
@@ -141,7 +141,7 @@ public class Map {
 					}
 				}
 				if(handler.multiForLuigi) {
-					if(entity.getLeftBounds().intersects(handler.getMario().getRightBounds()) ||entity.getLeftBounds().intersects(handler.getLuigi().getRightBounds()) ) {
+					if(entity.getLeftBounds().intersects(handler.getMario().getRightBounds())  ) {
 						State.setState(handler.getGame().GameOver);
 					}}
 
@@ -190,17 +190,11 @@ public class Map {
 
 		// by yeran to implement the game over state  
 
-		for (BaseStaticEntity blocks: blocksOnMap) {
-			if(blocks instanceof BoundBlock || blocks instanceof  BlackHole && !handler.multiForLuigi ) {
-				if(blocks.getBounds().intersects(handler.getMario().getBounds()) || blocks.getBounds().intersects(handler.getLuigi().getBounds()) ) {
-					State.setState(handler.getGame().GameOver);
-				}
-			}
-		}
-		if(!handler.multiForLuigi) {
+	
+		if(handler.multiForLuigi) {
 			for (BaseStaticEntity blocks: blocksOnMap) {
 				if(blocks instanceof BoundBlock || blocks instanceof  BlackHole) {
-					if(blocks.getBounds().intersects(handler.getMario().getBounds()) ) {
+					if(blocks.getBounds().intersects(handler.getLuigi().getBounds())  ) {
 						State.setState(handler.getGame().GameOver);
 					}
 				}
@@ -217,46 +211,29 @@ public class Map {
 				g2.drawImage(((Goomba)entity).anim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
 // by yeran to invoke the game over state
 				if(handler.multiForLuigi) {
-					if(entity.getRightBounds().intersects(handler.getMario().getLeftBounds()) ||entity.getRightBounds().intersects(handler.getLuigi().getLeftBounds())) {
+					if(entity.getRightBounds().intersects(handler.getLuigi().getLeftBounds())) {
 						State.setState(handler.getGame().GameOver);
 					}
-					else if(entity.getLeftBounds().intersects(handler.getMario().getRightBounds()) || entity.getLeftBounds().intersects(handler.getLuigi().getRightBounds())) {
+					else if(entity.getLeftBounds().intersects(handler.getLuigi().getRightBounds())) {
 						State.setState(handler.getGame().GameOver);
 					}}
 
-				if(!handler.multiForLuigi) {
-					if(entity.getRightBounds().intersects(handler.getMario().getLeftBounds()) ) {
-						State.setState(handler.getGame().GameOver);
-
-					}
-					else if(entity.getLeftBounds().intersects(handler.getMario().getRightBounds()) ) {
-						State.setState(handler.getGame().GameOver);
-					}	
-				}
-
+			
 
 			}
 			// by yeran to choose the correct animation         
 			else if(entity instanceof Turtle && !entity.ded){
 				if(handler.multiForLuigi) {
-					if(entity.getRightBounds().intersects(handler.getMario().getLeftBounds()) || entity.getRightBounds().intersects(handler.getLuigi().getLeftBounds()) ) {
+					if( entity.getRightBounds().intersects(handler.getLuigi().getLeftBounds()) ) {
 						State.setState(handler.getGame().GameOver);
 					}}
 
-				if(!handler.multiForLuigi) {
-					if(entity.getRightBounds().intersects(handler.getMario().getLeftBounds()) ) {
-						State.setState(handler.getGame().GameOver);
-					}
-				}
+			
 				if(handler.multiForLuigi) {
-					if(entity.getLeftBounds().intersects(handler.getMario().getRightBounds()) ||entity.getLeftBounds().intersects(handler.getLuigi().getRightBounds()) ) {
+					if(entity.getLeftBounds().intersects(handler.getLuigi().getRightBounds()) ) {
 						State.setState(handler.getGame().GameOver);
 					}}
-				if(!handler.multiForLuigi) {
-					if(entity.getLeftBounds().intersects(handler.getMario().getRightBounds())) {
-						State.setState(handler.getGame().GameOver);
-					}
-				}
+			
 				if(entity.getDirection().equals("Right")) {
 
 					g2.drawImage(((Turtle)entity).reverse.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);}
