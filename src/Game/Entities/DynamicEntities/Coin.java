@@ -5,10 +5,10 @@ import Main.Handler;
 
 import Resources.Images;
 
-public class Mushroom extends Item {
+public class Coin extends Item {
 
-    public Mushroom(int x, int y, int width, int height, Handler handler) {
-        super(x, y, width, height, handler, Images.mushroom);
+    public Coin(int x, int y, int width, int height, Handler handler) {
+        super(x, y, width, height, handler, Images.coin);
     }
 
     @Override
@@ -19,8 +19,7 @@ public class Mushroom extends Item {
                 velY = velY + gravityAcc;
                 checkFalling();
             }
-            checkHorizontal();
-            move();
+          
         }
     }
 

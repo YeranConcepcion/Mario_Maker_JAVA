@@ -20,6 +20,8 @@ public class Player extends BaseDynamicEntity {
     public boolean falling = true, jumping = false,isBig=false,running = false,changeDirrection=false;
     public double gravityAcc = 0.38;
     int changeDirectionCounter=0;
+    int winL=0;
+    int winM=0;
 
     public Player(int x, int y, int width, int height, Handler handler, BufferedImage sprite,Animation PSLA,Animation PSRA,Animation PBLWA,Animation PBRWA,Animation PBLRA,Animation PBRRA) {
         super(x, y, width, height, handler, sprite);
@@ -63,6 +65,13 @@ public class Player extends BaseDynamicEntity {
                 playerBigRightRunAnimation.tick();
             }
         }
+        if(winL >= 3) {
+        	State.setState(handler.getGame().LuigiWins);
+        }
+        if(winM >= 5) {
+        	State.setState(handler.getGame().MarioWins);
+        }
+        
     }
 
     private void checkItemCollision() {
@@ -77,8 +86,27 @@ public class Player extends BaseDynamicEntity {
        			 State.setState(handler.getGame().LuigiWins);
        		}
         	}
+        	
+
+        	if(entity instanceof Coin && handler.multiForLuigi) {
+        		if(entity.getBounds().intersects(handler.getMario().getBounds())&&((Coin) entity).used) {
+        			 winM++;
+        		}
+        		if(entity.getBounds().intersects(handler.getLuigi().getBounds())&&((Coin) entity).used) {
+        			winL++;
+       		}
+        	}
             if (entity != null && getBounds().intersects(entity.getBounds()) && entity instanceof Item && !isBig) {
                 isBig = true;
+                this.y -= 8;
+                this.height += 8;
+                setDimension(new Dimension(width, this.height));
+                ((Item) entity).used = true;
+                entity.y = -100000;
+            }
+            
+            if (entity != null && getBounds().intersects(entity.getBounds()) && entity instanceof Coin) {
+                
                 this.y -= 8;
                 this.height += 8;
                 setDimension(new Dimension(width, this.height));

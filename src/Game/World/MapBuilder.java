@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 import Game.Entities.DynamicEntities.BaseDynamicEntity;
+import Game.Entities.DynamicEntities.Coin;
 import Game.Entities.DynamicEntities.Goomba;
 import Game.Entities.DynamicEntities.Luigi;
 import Game.Entities.DynamicEntities.Mario;
@@ -31,6 +32,7 @@ public class MapBuilder {
 	public static int mushroom = new Color(178,0,255).getRGB();
 	public static int star = new Color(246,207,10).getRGB();//gold
 	public static int goomba = new Color(167,15,1).getRGB();
+	public static int coin = new Color(204,10,204).getRGB();
 	
 // by yeran 
 	public static int turtle = new Color(0,0,102).getRGB();// green
@@ -92,6 +94,11 @@ public class MapBuilder {
 				}else if(currentPixel == star){
 					BaseDynamicEntity star = new Star(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addEnemy(star);
+				}
+				
+				else if(currentPixel == coin){
+					BaseDynamicEntity coin = new Coin(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					mapInCreation.addEnemy(coin);
 				}
 				
 				else if(currentPixel == goomba){

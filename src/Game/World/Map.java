@@ -76,7 +76,9 @@ public class Map {
 		handler.setIsInMap(true);
 
 		Point camLocation = new Point((int)handler.getCamera().getX(), (int)handler.getCamera().getY());
+		
 		g2.translate(-camLocation.x, -camLocation.y);
+		
 		g2.drawImage(Images.backgrounds2[this.mapBackground], camLocation.x, camLocation.y, this.handler.getWidth(), this.handler.getHeight(),null);
 
 		for (BaseStaticEntity block:blocksOnMap) {
@@ -92,7 +94,7 @@ public class Map {
 				}
 			}
 		}
-		if(handler.multiForLuigi) {
+	
 			for (BaseStaticEntity blocks: blocksOnMap) {
 				if(blocks instanceof BoundBlock || blocks instanceof  BlackHole) {
 					if(blocks.getBounds().intersects(handler.getMario().getBounds())   ) {
@@ -100,7 +102,7 @@ public class Map {
 					}
 				}
 			}
-		}
+		
 
 		for (BaseDynamicEntity entity:enemiesOnMap) {
 			if(entity instanceof Item){
@@ -130,7 +132,7 @@ public class Map {
 			//by yeran to choose the correct animation         
 			else if(entity instanceof Turtle && !entity.ded){
 				if(handler.multiForLuigi) {
-					if(entity.getRightBounds().intersects(handler.getMario().getLeftBounds()) ) {
+					if(entity.getRightBounds().intersects(handler.getMario().getLeftBounds()) || entity.getRightBounds().intersects(handler.getLuigi().getLeftBounds()) ) {
 						State.setState(handler.getGame().GameOver);
 
 					}}
@@ -141,7 +143,7 @@ public class Map {
 					}
 				}
 				if(handler.multiForLuigi) {
-					if(entity.getLeftBounds().intersects(handler.getMario().getRightBounds())  ) {
+					if(entity.getLeftBounds().intersects(handler.getMario().getRightBounds()) ||entity.getLeftBounds().intersects(handler.getLuigi().getRightBounds()) ) {
 						State.setState(handler.getGame().GameOver);
 					}}
 
@@ -163,17 +165,27 @@ public class Map {
 				g2.drawImage(entity.sprite, entity.x, entity.y, entity.width, entity.height, null);
 			}
 		}
+		
 		handler.getMario().drawMario(g2);
 		if(this.listener != null && MapBuilder.mapDone) {
 			this.listener.render(g2);
 			this.hand.render(g2);
 			this.walls.render(g2);
-		} 
+			
+		}  
+
 		if(handler.multiForLuigi) {
 			handler.getLuigi().drawmario(g2);
+		
 		}
 
 	}
+	
+	
+	
+	
+	
+	
 	public void drawMapforLuigi(Graphics2D g2) {
 
 		handler.setIsInMap(true);
@@ -247,19 +259,20 @@ public class Map {
 				g2.drawImage(entity.sprite, entity.x, entity.y, entity.width, entity.height, null);
 			}
 		}
-		handler.getMario().drawMario(g2);
+		
 		if(this.listener != null && MapBuilder.mapDone) {
 			this.listener.render(g2);
 			this.hand.render(g2);
 			this.walls.render(g2);
-		} 
+		}  
 		if(handler.multiForLuigi) {
 			handler.getLuigi().drawmario(g2);
 			handler.getMario().drawMario(g2);
 
 		}
 		if(handler.multiForLuigi) {
-			g2.translate(camLocation2.x, camLocation2.y);}
+			g2.translate(camLocation2.x, camLocation2.y);
+			}
 
 	}
 

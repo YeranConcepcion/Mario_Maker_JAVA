@@ -42,6 +42,7 @@ public class MenuState extends State {
 
 	private DisplayScreen display;
 	private MultiPScreen displayTwo;
+	public boolean inMap;
 
 	private int[] str={83,117,98,32,116,111,32,80,101,119,100,115};
 	private String str2="";
@@ -126,7 +127,7 @@ public class MenuState extends State {
 				handler.getMouseManager().setUimanager(uiManager);
 
 				//New Map
-				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) - (64), 128, 64, "New Map", () -> {
+				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) - (90), 128, 64, "New Map", () -> {
 					if(!handler.isInMap()) {
 						mode = "Menu";
 						initNew("New Map Creator", handler);
@@ -135,10 +136,19 @@ public class MenuState extends State {
 
 
 				//testMap1
-				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, handler.getHeight() / 2 + (handler.getHeight() / 10), 128, 64, "Map 1", () -> {
+				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, handler.getHeight() / 2 + (handler.getHeight() / 10)-(30), 128, 64, "Map 1", () -> {
 					if(!handler.isInMap()) {
 						mode = "Menu";
 						handler.setMap(MapBuilder.createMap(Images.testMap, handler));
+						State.setState(handler.getGame().gameState);
+					}
+				}, handler,Color.BLACK));
+				
+			//testHelloWorld
+				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, handler.getHeight() / 2 + (handler.getHeight() / 10)+ 32-10, 128, 64, "Hello World Map", () -> {
+					if(!handler.isInMap()) {
+						mode = "Menu";
+						handler.setMap(MapBuilder.createMap(Images.HelloMap, handler));
 						State.setState(handler.getGame().gameState);
 					}
 				}, handler,Color.BLACK));
@@ -176,12 +186,6 @@ public class MenuState extends State {
 			}
 			
 			
-			
-			
-			
-			
-			
-			
 			if (mode.equals("Select")&& handler.multiOn) {
 				mode = "Selecting";
 				uiManager = new UIManager(handler);
@@ -200,16 +204,16 @@ public class MenuState extends State {
 				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, handler.getHeight() / 2 + (handler.getHeight() / 10), 128, 64, "Race for the Star", () -> {
 					if(!handler.isInMap()) {
 						mode = "Menu";
-						handler.setMap(MapBuilder.createMap(Images.testMap, handler));
+						handler.setMap(MapBuilder.createMap(Images.starRaceMap, handler));
 						State.setState(handler.getGame().gameState);
 					}
 				}, handler,Color.BLACK));
 
 				//testmap2
-				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) + (64), 128, 64, "Coin Collection", () -> {
+				uiManager.addObjects(new UIStringButton(handler.getWidth() / 2 - 64, (handler.getHeight() / 2) + (handler.getHeight() / 10) + (64), 128, 64, "Pro Level", () -> {
 					if(!handler.isInMap()) {
 						mode = "Menu";
-						handler.setMap(MapBuilder.createMap(Images.testMaptwo, handler));
+						handler.setMap(MapBuilder.createMap(Images.starMap, handler));
 						State.setState(handler.getGame().gameState);
 					}
 				}, handler,Color.BLACK));
@@ -333,6 +337,12 @@ public class MenuState extends State {
 			display.getCanvas().setCursor(c);
 			colorSelected = MapBuilder.goomba;
 		}
+		
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_C)){
+			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,0,255,128), new Point(0, 0), "cursor1");
+			display.getCanvas().setCursor(c);
+			colorSelected = MapBuilder.coin;
+		}
 // by yeran
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_8)){
 			Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(Images.tint(Images.Cursor,12,0,12), new Point(0, 0), "cursor1");
@@ -377,9 +387,29 @@ public class MenuState extends State {
 			
 		}
 		
-		
-		
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER) && handler.multiForLuigi){
+			for (int i = 0; i < GridWidthPixelCount; i++) {
+				for (int j = 0; j < GridHeightPixelCount; j++) {
+					if(blocks[i][j]!=null && blocks[i][j].equals(new Color(MapBuilder.mario)) && blocks[i][j+1]!=null&& !blocks[i][j+1].equals(new Color(MapBuilder.mario))){
+						
+						handler.setMap(MapBuilder.createMap(createImage(GridWidthPixelCount,GridHeightPixelCount,blocks,JOptionPane.showInputDialog("Enter file name: ","Mario Heaven")), handler));
+						State.setState(handler.getGame().gameState);
+						creatingMap=false;
+						display.getFrame().setVisible(false);
+						display.getFrame().dispose();
+						handler.getGame().mouseManager=handler.getGame().initialmouseManager;
+						inMap = true;
+						return;
+						
+					}
+					
+				}
+			}
+			JOptionPane.showMessageDialog(display.getFrame(), "You cant have a map without at least a Mario and a Luigi and a floor right under them. (1 for Mario), ( L for Luigi)");
+		
+		}
+		
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER) && handler.multiForLuigi && inMap){
 			for (int i = 0; i < GridWidthPixelCount; i++) {
 				for (int j = 0; j < GridHeightPixelCount; j++) {
 					if(blocks[i][j]!=null && blocks[i][j].equals(new Color(MapBuilder.luigi)) && blocks[i][j+1]!=null&& !blocks[i][j+1].equals(new Color(MapBuilder.luigi))){
@@ -399,6 +429,7 @@ public class MenuState extends State {
 		
 		}
 		
+
 
 		
 		
@@ -435,7 +466,8 @@ public class MenuState extends State {
 					"9 -> Black Hole Block (Gray)\n"+
 					"T -> Turtle (Dark Blue)\n"+
 					"S -> Star (Golden)\n"+
-					"L -> Luigi (Green)"
+					"L -> Luigi (Green)\n"+
+					"C-> Coin (Soft Pink)"
 					);
 		}
 	}

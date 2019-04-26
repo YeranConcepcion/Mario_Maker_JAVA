@@ -61,6 +61,11 @@ public class Images {
 
     public static BufferedImage testMap;
     public static BufferedImage testMaptwo;
+    
+    public static BufferedImage starMap;
+    
+    public static BufferedImage HelloMap;
+    
  
  // by yeran to add the new blocks
     public static BufferedImage rainbowBlock;
@@ -72,6 +77,7 @@ public class Images {
     public static BufferedImage boundBlock;
     public static BufferedImage mushroom;
     public static BufferedImage star;
+    public static BufferedImage coin;
     public static BufferedImage goombaDies;
     public static BufferedImage turtleDies;
    
@@ -86,6 +92,7 @@ public class Images {
     private SpriteSheet turtleSpriteSheet;
     private SpriteSheet SSpriteSheet;
     private SpriteSheet SAttackSpriteSheet;
+	public static BufferedImage starRaceMap;
 
     public Images() {
 
@@ -313,7 +320,9 @@ public class Images {
             //maps
             testMap = ImageIO.read(getClass().getResourceAsStream("/maps/testmap1.png"));
             testMaptwo = ImageIO.read(getClass().getResourceAsStream("/maps/testmap2.png"));
-
+            starMap = ImageIO.read(getClass().getResourceAsStream("/maps/StarRace.png"));
+            HelloMap = ImageIO.read(getClass().getResourceAsStream("/maps/Hello World.png"));
+            starRaceMap = ImageIO.read(getClass().getResourceAsStream("/maps/StarRace.png"));
             //blocks
             boundBlock = interactableSpriteSheet.crop(12,73,16,16);
             misteryBlock = interactableSpriteSheet.crop(32,93,16,16);
@@ -327,6 +336,7 @@ public class Images {
             //items
             mushroom = interactableSpriteSheet.crop(112,34,16,16);
             star = ImageIO.read(getClass().getResourceAsStream("/Sheets/star.png"));
+            coin = ImageIO.read(getClass().getResourceAsStream("/Sheets/coin.png"));
 
             //enemy
             goomba[0]=goombaSpriteSheet.crop(119,40,162,162);

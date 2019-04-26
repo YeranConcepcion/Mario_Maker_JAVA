@@ -297,6 +297,7 @@ public class GameSetUp implements Runnable {
 
 			gl.dispose();}
 	}
+	
 	public Map getMap() {
 		Map map = new Map(this.handler);
 		Images.makeMap(0, MapBuilder.pixelMultiplier, 31, 200, map, this.handler);

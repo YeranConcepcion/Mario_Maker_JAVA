@@ -10,7 +10,9 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 public class Luigi extends Player{
-
+/*
+ * To acces the luigi Special abilities press enter and it will activate his Low Gravity Jump
+ */
 	private boolean hit = false;
 	public boolean grabbed =false;
 
